@@ -2,15 +2,16 @@
 
 namespace VtM.Models
 {
-    public class Ritual
+    public class ThinBloodAlchemy
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        [Range(1,5)]
-        public int RitualLevel { get; set; }
         public string Ingredients { get; set; }
-        public string Process { get; set; }
+        public string ActivationCost { get; set; }
+        public string DicePools { get; set; }
         public string System { get; set; }
+        [Range(1,5)]
+        public int AlchemyLevel { get; set; }
     }
 }

@@ -99,10 +99,21 @@ namespace VtM.Models
 
 
         public CharacterPublicity CharacterPublicity { get; set; }
+        public Coterie? CoterieId { get; set; }
 
+        public virtual ICollection<Weapon>? Weapons { get; set; }
+
+        public int HavenId { get; set; }
+        public virtual Haven? Haven { get; set; }
+
+        public virtual ICollection<Ritual>? Rituals { get; set; } = new HashSet<Ritual>();
+        public virtual ICollection<ThinBloodAlchemy>? ThinBloodAlchemies { get; set; } = new HashSet<ThinBloodAlchemy>();
+
+        public ThinBloodDistillationMethod ThinBloodDistillationMethod { get; set; }
 
         //-- Navigational Properties --//
         public virtual Chronicle? Chronicle { get; set; }
+        public virtual Coterie? Coterie { get; set; }
         public virtual PredatorType? PredatorType { get; set; }
         public virtual Clan Clan { get; set; } = null!;
         public virtual IdentityUser User { get; set; } = null!;

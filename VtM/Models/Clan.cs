@@ -3,8 +3,8 @@
     public class Clan
     {
         public int Id { get; set; }
-        public string ClanName { get; set; } = null!;
-        public string ClanBane { get; set; } = null!;
+        public string Name { get; set; } = null!;
+        public string Bane { get; set; } = null!;
 
         }
 }

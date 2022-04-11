@@ -18,8 +18,8 @@ namespace VtM.Models
         
 
         //Should grab those differently
-        public string? Roll { get; set; }
-        public string? CounterRoll { get; set; }
+        public string? RollDescription { get; set; }
+        public string? CounterRollDescription { get; set; }
 
         public virtual Discipline Discipline { get; set; } = null!;
         public virtual Discipline? Amalgram { get; set; }

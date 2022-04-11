@@ -6,7 +6,7 @@ namespace VtM.Models
     {
         public int Id { get; set; }
         [Range(0,10)]
-        public int BloodPotencyValue { get; set; }
+        public int Level { get; set; }
         [Range(1,6)]
         public int BloodSurge { get; set; }
         [Range(1,5)]

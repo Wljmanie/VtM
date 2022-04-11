@@ -2,14 +2,14 @@
 
 namespace VtM.Models
 {
-    public class Flaw
+    public class HavenFlaw
     {
         public int Id { get; set; }
-        public string Name  { get; set; } = null!;
+        public string Name { get; set; } = null!;
         public string Description { get; set; } = null!;
-        [Range(1,5)]
+        [Range(1, 5)]
         public int Value { get; set; }
-        public int CharacterId { get; set; }
-        public virtual Character Character { get; set; } = null!;
+        public int HavenId { get; set; }
+        public virtual Haven Haven { get; set; } = null!;
     }
 }
