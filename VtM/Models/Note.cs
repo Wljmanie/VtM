@@ -5,10 +5,10 @@
         public int Id { get; set; }
         public string Name { get; set; } = null!;
         public string Description { get; set; } = null!;
-        public int CharacterId { get; set; }
+        public int? CharacterId { get; set; }
 
         public int OrderId { get; set; }
 
-        public virtual Character Character { get; set; } = null!;
+        public virtual Character? Character { get; set; }
     }
 }

@@ -1,11 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VtM.Models
 {
     public class DisciplinePower
     {
         public int Id { get; set; }
-        public int DisciplineId { get; set; }
+        public int? DisciplineId { get; set; }
+        [ForeignKey("Amalgram")]
         public int? AmalgamId { get; set; }
         [Range(1, 5)]
         public int? AmalgramLevel { get; set; }
@@ -21,7 +23,7 @@ namespace VtM.Models
         public string? RollDescription { get; set; }
         public string? CounterRollDescription { get; set; }
 
-        public virtual Discipline Discipline { get; set; } = null!;
+        public virtual Discipline? Discipline { get; set; }
         public virtual Discipline? Amalgram { get; set; }
 
         public int BookId { get; set; }

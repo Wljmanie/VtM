@@ -10,7 +10,7 @@ namespace VtM.Models
         public string Name { get; set; } = null!;
         public int? Amount { get; set; }
         public string? Description { get; set; }
-        public int CharacterId { get; set; }
+        public int? CharacterId { get; set; }
         public bool CharacterWearsIt { get; set; }
         public string Location { get; set; } = null!;
         public int OrderId { get; set; }
@@ -27,7 +27,7 @@ namespace VtM.Models
         [DisplayName("File Extention")]
         public string? FileContentType { get; set; }
 
-        public virtual Character Character { get; set; } = null!;
+        public virtual Character? Character { get; set; }
         public int BookId { get; set; }
         public virtual Book Book { get; set; } = null!;
     }

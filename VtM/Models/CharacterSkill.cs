@@ -8,12 +8,12 @@ namespace VtM.Models
         public int SkillId { get; set; }
 
         [Range(1,5)]
-        public int SkillLevel { get; set; }
+        public int? SkillLevel { get; set; }
 
-        public int CharacterId { get; set; }
+        public int? CharacterId { get; set; }
 
-        public virtual Skill Skill{ get; set; } = null!;
-        public virtual Character Character{ get; set; } = null!;
+        public virtual Skill? Skill{ get; set; }
+        public virtual Character? Character{ get; set; }
         public virtual ICollection<SkillSpecialization> Specializations { get; set; } = new HashSet<SkillSpecialization>();
     }
 }
