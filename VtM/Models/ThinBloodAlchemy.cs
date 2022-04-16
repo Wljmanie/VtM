@@ -13,5 +13,7 @@ namespace VtM.Models
         public string System { get; set; }
         [Range(1,5)]
         public int AlchemyLevel { get; set; }
+        public int BookId { get; set; }
+        public virtual Book Book { get; set; } = null!;
     }
 }

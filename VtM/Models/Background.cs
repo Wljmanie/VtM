@@ -13,5 +13,8 @@ namespace VtM.Models
         public int BackgroundValue { get; set; }
         public int CharacterId { get; set; }
         public virtual Character Character { get; set; } = null!;
+
+        public int BookId { get; set; }
+        public virtual Book Book { get; set; } = null!;
     }
 }

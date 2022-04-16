@@ -8,7 +8,7 @@ namespace VtM.Models
         public string Name { get; set; } = null!;
         public string StoryTellerId { get; set; } = null!;
 
-        public virtual IdentityUser StoryTeller { get; set; } = null!;
-        public virtual ICollection<IdentityUser> Players { get; set; } = new HashSet<IdentityUser>();
+        public virtual VtMUser StoryTeller { get; set; } = null!;
+        public virtual ICollection<VtMUser> Players { get; set; } = new HashSet<VtMUser>();
     }
 }

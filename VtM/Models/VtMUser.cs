@@ -1,16 +1,13 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VtM.Models
 {
-    public class Clan
+    public class VtMUser : IdentityUser
     {
-        public int Id { get; set; }
-        public string Name { get; set; } = null!;
-        public string Bane { get; set; } = null!;
-        public int BookId { get; set; }
-        public virtual Book Book { get; set; } = null!;
+        public string NickName { get; set; } = null!;
 
         //-- Image --//
         [NotMapped]
@@ -23,6 +20,9 @@ namespace VtM.Models
 
         [DisplayName("File Extention")]
         public string? FileContentType { get; set; }
+
+        public virtual ICollection<Character> Characters { get; set; } = new HashSet<Character>();
+
 
     }
 }

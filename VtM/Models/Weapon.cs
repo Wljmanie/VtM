@@ -1,4 +1,7 @@
-﻿using VtM.Enums;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using VtM.Enums;
 
 namespace VtM.Models
 {
@@ -12,7 +15,21 @@ namespace VtM.Models
         public int? Ammo { get; set; }
         public int? CharacterId { get; set; }
 
+        //-- Image --//
+        [NotMapped]
+        [DataType(DataType.Upload)]
+        public IFormFile? FormFile { get; set; }
+
+        [DisplayName("FileName")]
+        public string? FileName { get; set; }
+        public string? FileData { get; set; }
+
+        [DisplayName("File Extention")]
+        public string? FileContentType { get; set; }
+
         public virtual Character? Character { get; set; }
+        public int BookId { get; set; }
+        public virtual Book Book { get; set; } = null!;
 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using VtM.Enums;
@@ -22,17 +23,31 @@ namespace VtM.Models
         public int? Generation { get; set; }
         public string? Sire { get; set; }
 
+        //-- Image --//
+        [NotMapped]
+        [DataType(DataType.Upload)]
+        public IFormFile? FormFile { get; set; }
+        
+        [DisplayName("FileName")]
+        public string? FileName { get; set; }
+        public string? FileData { get; set; }
+
+        [DisplayName("File Extention")]
+        public string? FileContentType { get; set; }
+
+
+
         //-- Attributes --//
 
         //-- Physical --//
-        [Range(1,5)]
+        [Range(1, 5)]
         public int Strength { get; set; }
-        [Range(1,5)]
+        [Range(1, 5)]
         public int Dexterity { get; set; }
-        [Range(1,5)]
+        [Range(1, 5)]
         public int Stamina { get; set; }
         //-- Social --//
-        [Range(1,5)]
+        [Range(1, 5)]
         public int Charisma { get; set; }
         [Range(1, 5)]
         public int Manipulation { get; set; }
@@ -50,10 +65,11 @@ namespace VtM.Models
         public virtual ICollection<CharacterSkill> CharacterSkills { get; set; } = new HashSet<CharacterSkill>();
 
         //-- Touchstones & Convictions --//
-        public virtual ICollection<TouchstoneConviction> TouchstoneConvictions { get; set; } = new HashSet<TouchstoneConviction>(); 
+        public virtual ICollection<TouchstoneConviction> TouchstoneConvictions { get; set; } = new HashSet<TouchstoneConviction>();
 
         //-- Disciplines --//
-        public virtual ICollection<DisciplinePower> DisciplinePowers { get; set; } = new HashSet<DisciplinePower>();    
+        public virtual ICollection<DisciplinePower> DisciplinePowers { get; set; } = new HashSet<DisciplinePower>();
+        public virtual ICollection<DisciplineLevel> DisciplineLevels { get; set; } = new HashSet<DisciplineLevel>();
 
         //-- Health --//
         public int SuperficialDamageTaken { get; set; }
@@ -61,6 +77,8 @@ namespace VtM.Models
         //-- Willpower --//
         public int SuperficialWillpowerDamageTaken { get; set; }
         public int AggravatedWillpowerDamageTaken { get; set; }
+        [NotMapped]
+        public int UnspendWillpower { get { return Composure + Resolve - SuperficialDamageTaken - AggravatedDamageTaken; } } 
 
         //-- Humanity --//
         [Range(1,10)]
@@ -110,13 +128,14 @@ namespace VtM.Models
         public virtual ICollection<ThinBloodAlchemy>? ThinBloodAlchemies { get; set; } = new HashSet<ThinBloodAlchemy>();
 
         public ThinBloodDistillationMethod ThinBloodDistillationMethod { get; set; }
+        public virtual ICollection<LoreSheetPart> LoreSheetParts { get; set; } = new HashSet<LoreSheetPart>();
 
         //-- Navigational Properties --//
         public virtual Chronicle? Chronicle { get; set; }
         public virtual Coterie? Coterie { get; set; }
         public virtual PredatorType? PredatorType { get; set; }
         public virtual Clan Clan { get; set; } = null!;
-        public virtual IdentityUser User { get; set; } = null!;
+        public virtual VtMUser User { get; set; } = null!;
         public virtual BloodPotency? BloodPotency { get; set; }
 
         public virtual ICollection<Possession> Possessions { get; set; } = new HashSet<Possession>();

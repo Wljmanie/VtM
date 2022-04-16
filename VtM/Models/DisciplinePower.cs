@@ -23,5 +23,8 @@ namespace VtM.Models
 
         public virtual Discipline Discipline { get; set; } = null!;
         public virtual Discipline? Amalgram { get; set; }
+
+        public int BookId { get; set; }
+        public virtual Book Book { get; set; } = null!;
     }
 }
