@@ -1,0 +1,301 @@
+﻿@model IEnumerable<VtM.Models.Character>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Concept)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ambition)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Desire)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Generation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sire)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FileName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FileData)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FileContentType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Strength)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dexterity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stamina)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Charisma)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Manipulation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Composure)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Intelligence)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Wits)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Resolve)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SuperficialDamageTaken)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AggravatedDamageTaken)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SuperficialWillpowerDamageTaken)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AggravatedWillpowerDamageTaken)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Humanity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stains)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hunger)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ResonanceType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrueAge)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApparentAge)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfBirth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfDeath)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Appearance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DistinguishingFeatures)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.History)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExperienceTotal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExperienceSpent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CharacterPublicity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Haven)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ThinBloodDistillationMethod)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Chronicle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Coterie)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PredatorType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Clan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BloodPotency)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Concept)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ambition)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Desire)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Generation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sire)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FileName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FileData)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FileContentType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Strength)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dexterity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stamina)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Charisma)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Manipulation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Composure)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Intelligence)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Wits)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Resolve)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SuperficialDamageTaken)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AggravatedDamageTaken)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SuperficialWillpowerDamageTaken)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AggravatedWillpowerDamageTaken)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Humanity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stains)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hunger)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ResonanceType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrueAge)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApparentAge)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfBirth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfDeath)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Appearance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DistinguishingFeatures)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.History)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExperienceTotal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExperienceSpent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CharacterPublicity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Haven.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThinBloodDistillationMethod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Chronicle.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Coterie.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PredatorType.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Clan.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BloodPotency.Id)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</body>
+</html>

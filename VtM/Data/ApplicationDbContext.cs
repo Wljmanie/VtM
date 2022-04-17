@@ -26,6 +26,7 @@ namespace VtM.Data
         public DbSet<Flaw>? Flaws { get; set; }
         public DbSet<Haven>? Havens { get; set; }
         public DbSet<HavenFlaw>? HavenFlaws { get; set; }
+        public DbSet<HavenImage>? HavenImages { get; set; }
         public DbSet<HavenMerit>? HavenMerits { get; set; }
         public DbSet<LoreSheet>? LoreSheets { get; set; }
         public DbSet<LoreSheetPart>? LoreSheetParts { get; set; }

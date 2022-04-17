@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VtM.Data;
 
@@ -11,9 +12,10 @@ using VtM.Data;
 namespace VtM.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220417093048_HavenImageFix")]
+    partial class HavenImageFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -778,7 +780,7 @@ namespace VtM.Data.Migrations
                     b.Property<string>("FileName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("HavenId")
+                    b.Property<int?>("HavenId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -1603,13 +1605,9 @@ namespace VtM.Data.Migrations
 
             modelBuilder.Entity("VtM.Models.HavenImage", b =>
                 {
-                    b.HasOne("VtM.Models.Haven", "Haven")
+                    b.HasOne("VtM.Models.Haven", null)
                         .WithMany("HavenImages")
-                        .HasForeignKey("HavenId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Haven");
+                        .HasForeignKey("HavenId");
                 });
 
             modelBuilder.Entity("VtM.Models.HavenMerit", b =>

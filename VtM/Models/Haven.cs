@@ -13,20 +13,10 @@ namespace VtM.Models
         [Range(0,3)]
         public int? HavenRating { get; set; }
 
-        public virtual ICollection<HavenMerit>? HavenMerits { get; set; }
-        public virtual ICollection<HavenFlaw>? HavenFlaw { get; set; }
+        public virtual ICollection<HavenMerit>? HavenMerits { get; set; } = new HashSet<HavenMerit>();
+        public virtual ICollection<HavenFlaw>? HavenFlaw { get; set; } = new HashSet<HavenFlaw>();
 
-        //-- Image --//
-        [NotMapped]
-        [DataType(DataType.Upload)]
-        public IFormFile? FormFile { get; set; }
-
-        [DisplayName("FileName")]
-        public string? FileName { get; set; }
-        public string? FileData { get; set; }
-
-        [DisplayName("File Extention")]
-        public string? FileContentType { get; set; }
+        public virtual ICollection<HavenImage>? HavenImages { get; set; } = new HashSet<HavenImage>();
 
     }
 }

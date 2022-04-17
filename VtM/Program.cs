@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using VtM.Data;
 using VtM.Models;
+using VtM.Services;
+using VtM.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,9 +17,19 @@ builder.Services.AddIdentity<VtMUser, IdentityRole>(options => options.SignIn.Re
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultUI()
     .AddDefaultTokenProviders();
+
+builder.Services.AddScoped<IVtMRolesService, VtMRolesService>();
+builder.Services.AddScoped<DataService>();
+
+
+
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
+DataService dataservice = app.Services.CreateScope().ServiceProvider.GetRequiredService<DataService>();
+if(dataservice != null) await dataservice.ManageDataAsync();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -43,5 +55,10 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
+
+
+
+
+
 
 app.Run();
