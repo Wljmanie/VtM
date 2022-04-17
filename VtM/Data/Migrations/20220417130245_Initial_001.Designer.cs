@@ -12,14 +12,14 @@ using VtM.Data;
 namespace VtM.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220416103754_Initial_001")]
+    [Migration("20220417130245_Initial_001")]
     partial class Initial_001
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.3")
+                .HasAnnotation("ProductVersion", "6.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -312,8 +312,8 @@ namespace VtM.Data.Migrations
                     b.Property<string>("FileContentType")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FileData")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("FileData")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("FileName")
                         .HasColumnType("nvarchar(max)");
@@ -465,11 +465,15 @@ namespace VtM.Data.Migrations
                     b.Property<int>("BookId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Compulsion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("FileContentType")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FileData")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("FileData")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("FileName")
                         .HasColumnType("nvarchar(max)");
@@ -505,8 +509,8 @@ namespace VtM.Data.Migrations
                     b.Property<string>("FileContentType")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FileData")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("FileData")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("FileName")
                         .HasColumnType("nvarchar(max)");
@@ -571,8 +575,8 @@ namespace VtM.Data.Migrations
                     b.Property<string>("FileContentType")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FileData")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("FileData")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("FileName")
                         .HasColumnType("nvarchar(max)");
@@ -717,15 +721,6 @@ namespace VtM.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FileContentType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FileData")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FileName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int?>("HavenRating")
                         .HasColumnType("int");
 
@@ -770,6 +765,37 @@ namespace VtM.Data.Migrations
                     b.HasIndex("HavenId");
 
                     b.ToTable("HavenFlaws");
+                });
+
+            modelBuilder.Entity("VtM.Models.HavenImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("FileContentType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("FileData")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("HavenId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HavenId");
+
+                    b.ToTable("HavenImages");
                 });
 
             modelBuilder.Entity("VtM.Models.HavenMerit", b =>
@@ -953,8 +979,8 @@ namespace VtM.Data.Migrations
                     b.Property<string>("FileContentType")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FileData")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("FileData")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("FileName")
                         .HasColumnType("nvarchar(max)");
@@ -1210,8 +1236,8 @@ namespace VtM.Data.Migrations
                     b.Property<string>("FileContentType")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FileData")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("FileData")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("FileName")
                         .HasColumnType("nvarchar(max)");
@@ -1298,8 +1324,8 @@ namespace VtM.Data.Migrations
                     b.Property<string>("FileContentType")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FileData")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("FileData")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("FileName")
                         .HasColumnType("nvarchar(max)");
@@ -1581,6 +1607,17 @@ namespace VtM.Data.Migrations
                     b.Navigation("Haven");
                 });
 
+            modelBuilder.Entity("VtM.Models.HavenImage", b =>
+                {
+                    b.HasOne("VtM.Models.Haven", "Haven")
+                        .WithMany("HavenImages")
+                        .HasForeignKey("HavenId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Haven");
+                });
+
             modelBuilder.Entity("VtM.Models.HavenMerit", b =>
                 {
                     b.HasOne("VtM.Models.Book", "Book")
@@ -1814,6 +1851,8 @@ namespace VtM.Data.Migrations
             modelBuilder.Entity("VtM.Models.Haven", b =>
                 {
                     b.Navigation("HavenFlaw");
+
+                    b.Navigation("HavenImages");
 
                     b.Navigation("HavenMerits");
                 });

@@ -9,8 +9,9 @@ namespace VtM.Models
         public int Id { get; set; }
         public string Name { get; set; } = null!;
         public string Bane { get; set; } = null!;
+        public string Compulsion { get; set; } = null!;
         public int BookId { get; set; }
-        public virtual Book Book { get; set; } = null!;
+        public virtual Book? Book { get; set; }
 
         //-- Image --//
         [NotMapped]
@@ -19,7 +20,7 @@ namespace VtM.Models
 
         [DisplayName("FileName")]
         public string? FileName { get; set; }
-        public string? FileData { get; set; }
+        public byte[]? FileData { get; set; }
 
         [DisplayName("File Extention")]
         public string? FileContentType { get; set; }

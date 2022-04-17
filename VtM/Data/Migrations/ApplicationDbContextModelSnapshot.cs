@@ -310,8 +310,8 @@ namespace VtM.Data.Migrations
                     b.Property<string>("FileContentType")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FileData")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("FileData")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("FileName")
                         .HasColumnType("nvarchar(max)");
@@ -463,11 +463,15 @@ namespace VtM.Data.Migrations
                     b.Property<int>("BookId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Compulsion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("FileContentType")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FileData")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("FileData")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("FileName")
                         .HasColumnType("nvarchar(max)");
@@ -503,8 +507,8 @@ namespace VtM.Data.Migrations
                     b.Property<string>("FileContentType")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FileData")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("FileData")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("FileName")
                         .HasColumnType("nvarchar(max)");
@@ -569,8 +573,8 @@ namespace VtM.Data.Migrations
                     b.Property<string>("FileContentType")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FileData")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("FileData")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("FileName")
                         .HasColumnType("nvarchar(max)");
@@ -772,8 +776,8 @@ namespace VtM.Data.Migrations
                     b.Property<string>("FileContentType")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FileData")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("FileData")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("FileName")
                         .HasColumnType("nvarchar(max)");
@@ -973,8 +977,8 @@ namespace VtM.Data.Migrations
                     b.Property<string>("FileContentType")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FileData")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("FileData")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("FileName")
                         .HasColumnType("nvarchar(max)");
@@ -1230,8 +1234,8 @@ namespace VtM.Data.Migrations
                     b.Property<string>("FileContentType")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FileData")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("FileData")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("FileName")
                         .HasColumnType("nvarchar(max)");
@@ -1318,8 +1322,8 @@ namespace VtM.Data.Migrations
                     b.Property<string>("FileContentType")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FileData")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("FileData")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("FileName")
                         .HasColumnType("nvarchar(max)");

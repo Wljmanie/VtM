@@ -16,7 +16,7 @@ namespace VtM.Models
 
         [DisplayName("FileName")]
         public string? FileName { get; set; }
-        public string? FileData { get; set; }
+        public byte[]? FileData { get; set; }
 
         [DisplayName("File Extention")]
         public string? FileContentType { get; set; }
