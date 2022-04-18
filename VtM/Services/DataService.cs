@@ -27,6 +27,7 @@ namespace VtM.Services
             await SeedBooksAsync();
             await SeedClans();
             await SeedBloodPotency();
+            await SeedDisciplines();
         }
 
         private async Task SeedRolesAsync()
@@ -379,6 +380,39 @@ namespace VtM.Services
             {
                 Console.WriteLine("*************  ERROR  *************");
                 Console.WriteLine("Error Seeding BloodPotency.");
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("***********************************");
+                throw;
+            }
+        }
+
+        private async Task SeedDisciplines()
+        {
+            if (_context.Disciplines.Any()) return;
+            try
+            {
+                IList<Discipline> disciplines = new List<Discipline>() {
+                     new Discipline(){ Name = "Animalism"},
+                     new Discipline(){ Name = "Auspex"},
+                     new Discipline(){ Name = "Celerity"},
+                     new Discipline(){ Name = "Dominate"},
+                     new Discipline(){ Name = "Fortitude"},
+                     new Discipline(){ Name = "Obfuscate"},
+                     new Discipline(){ Name = "Potence"},
+                     new Discipline(){ Name = "Presence"},
+                     new Discipline(){ Name = "Protean"},
+                     new Discipline(){ Name = "Blood Sorcery"},
+                     new Discipline(){ Name = "Oblivion"},
+                     new Discipline(){ Name = "Akhu Sorcery"},
+                };
+
+                await _context.AddRangeAsync(disciplines);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("*************  ERROR  *************");
+                Console.WriteLine("Error Seeding Disciples.");
                 Console.WriteLine(ex.Message);
                 Console.WriteLine("***********************************");
                 throw;

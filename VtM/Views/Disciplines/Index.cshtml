@@ -1,13 +1,13 @@
 ﻿@using VtM.Enums
 @using VtM.Services.Interfaces
-@model IEnumerable<VtM.Models.Clan>
+@model IEnumerable<VtM.Models.Discipline>
 @inject IImageService imageService
 
 @{
-    ViewData["Title"] = "Clans";
+    ViewData["Title"] = "Disciplines";
 }
 
-<h1>Clans</h1>
+<h1>Disciplines Overview</h1>
 
 <p>
     @if (User.IsInRole(Roles.Admin.ToString()) || User.IsInRole(Roles.StoryTeller.ToString()))
@@ -23,10 +23,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
-            </th>
-            
-            <th>
-                @Html.DisplayNameFor(model => model.Book)
             </th>
             
             <th></th>
@@ -45,21 +41,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Book.Title)
-            </td>
             
             <td>
                 @if (User.IsInRole(Roles.Admin.ToString()) || User.IsInRole(Roles.StoryTeller.ToString()))
-                {
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a><text> | </text>
-                }
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
-                @if (User.IsInRole(Roles.Admin.ToString()) || User.IsInRole(Roles.StoryTeller.ToString()))
-                {
-                    <text> | </text><a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                }
-            </td>
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a><text> | </text>
+                        <a asp-action = "Delete" asp-route-id = "@item.Id">Delete</a>
+                    }
+                </td>
         </tr>
 }
     </tbody>
