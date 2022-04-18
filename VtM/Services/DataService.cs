@@ -26,6 +26,7 @@ namespace VtM.Services
             await SeedUsersAsync();
             await SeedBooksAsync();
             await SeedClans();
+            await SeedBloodPotency();
         }
 
         private async Task SeedRolesAsync()
@@ -160,7 +161,7 @@ namespace VtM.Services
                     new Clan(){
                         Name = "Nosferatu", 
                         Bane = "Hideous and vile, all Nosferatu count as having the Repulsive Flaw (-2) and can never increase their rating in the Looks Merit. In addition, any attempt to disguise themselves as non-deformed incur a penalty to the dice pool equal to the character’s Bane Severity (this includes Discipline powers like Mask of a Thousand Faces and Impostor’s Guise). Most Nosferatu do not breach the Masquerade by just being seen.They are perceived by mortals to be grotesque and often terrifying, but not always supernaturally so.",
-                        Compulsion = "he need to know permeates the vampire. They become consumed with a hunger for secrets, to know that which few or no one knows, almost as strong as that for blood. They also refuse to share secrets with others, except in strict trade for greater ones. All actions not spent working toward learning a secret, no matter how big or small, receive a two-dice penalty.The Compulsion ends when the vampire learns a secret big enough to be considered useful. Sharing this secret is optional.",
+                        Compulsion = "The need to know permeates the vampire. They become consumed with a hunger for secrets, to know that which few or no one knows, almost as strong as that for blood. They also refuse to share secrets with others, except in strict trade for greater ones. All actions not spent working toward learning a secret, no matter how big or small, receive a two-dice penalty.The Compulsion ends when the vampire learns a secret big enough to be considered useful. Sharing this secret is optional.",
                         BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id 
                     },
                     new Clan(){ 
@@ -247,6 +248,137 @@ namespace VtM.Services
             {
                 Console.WriteLine("*************  ERROR  *************");
                 Console.WriteLine("Error Seeding Clans.");
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("***********************************");
+                throw;
+            }
+        }
+
+        private async Task SeedBloodPotency()
+        {
+            if (_context.BloodPotencies.Any()) return;
+            try
+            {
+                IList<BloodPotency> bloodpotencies = new List<BloodPotency>() {
+                     new BloodPotency()
+                     {
+                         Level = 0,
+                         BloodSurge = 1,
+                         DamageMendedPerRouse = 1,
+                         DisciplinePowerBonues = 0,
+                         DisciplineRouseCheckReroll = "None.",
+                         BaneSeverity = 0,
+                         FeedingPenalty = "No effect."
+                     },
+                     new BloodPotency()
+                     {
+                         Level = 1,
+                         BloodSurge = 2,
+                         DamageMendedPerRouse = 1,
+                         DisciplinePowerBonues = 0,
+                         DisciplineRouseCheckReroll = "Level 1.",
+                         BaneSeverity = 2,
+                         FeedingPenalty = "No effect."
+                     },
+                     new BloodPotency()
+                     {
+                         Level = 2,
+                         BloodSurge = 2,
+                         DamageMendedPerRouse = 2,
+                         DisciplinePowerBonues = 1,
+                         DisciplineRouseCheckReroll = "Level 1.",
+                         BaneSeverity = 2,
+                         FeedingPenalty = "Animal and bagged blood slakes half Hunger."
+                     },
+                     new BloodPotency()
+                     {
+                         Level = 3,
+                         BloodSurge = 3,
+                         DamageMendedPerRouse = 2,
+                         DisciplineRouseCheckReroll = "Level 2 and below.",
+                         DisciplinePowerBonues = 1,
+                         BaneSeverity = 3,
+                         FeedingPenalty = "Animal and bagged blood slakes half Hunger."
+                     },
+                    new BloodPotency()
+                     {
+                         Level = 4,
+                         BloodSurge = 3,
+                         DamageMendedPerRouse = 3,
+                         DisciplinePowerBonues = 2,
+                         DisciplineRouseCheckReroll = "Level 2 and below.",
+                         BaneSeverity = 3,
+                         FeedingPenalty = "Animal and bagged blood slake no Hunger. Slake 1 less Hunger per human."
+                     },
+                    new BloodPotency()
+                     {
+                         Level = 5,
+                         BloodSurge = 4,
+                         DamageMendedPerRouse = 3,
+                         DisciplinePowerBonues = 2,
+                         DisciplineRouseCheckReroll = "Level 3 and below.",
+                         BaneSeverity = 4,
+                         FeedingPenalty = "Animal and bagged blood slake no Hunger. Slake 1 less Hunger per human. Must drain and kill a human to reduce Hunger below 2."
+                     },
+                     new BloodPotency()
+                     {
+                         Level = 6,
+                         BloodSurge = 4,
+                         DamageMendedPerRouse = 3,
+                         DisciplinePowerBonues = 3,
+                         DisciplineRouseCheckReroll = "Level 3 and below.",
+                         BaneSeverity = 4,
+                         FeedingPenalty = "Animal and bagged blood slake no Hunger. Slake 2 less Hunger per human. Must drain and kill a human to reduce Hunger below 2."
+                     },
+                     new BloodPotency()
+                     {
+                         Level = 7,
+                         BloodSurge = 5,
+                         DamageMendedPerRouse = 3,
+                         DisciplinePowerBonues = 3,
+                         DisciplineRouseCheckReroll = "Level 4 and below.",
+                         BaneSeverity = 5,
+                         FeedingPenalty = "Animal and bagged blood slake no Hunger. Slake 2 less Hunger per human. Must drain and kill a human to reduce Hunger below 2."
+                     },
+                     new BloodPotency()
+                     {
+                         Level = 8,
+                         BloodSurge = 5,
+                         DamageMendedPerRouse = 4,
+                         DisciplinePowerBonues = 4,
+                         DisciplineRouseCheckReroll = "Level 4 and below.",
+                         BaneSeverity = 5,
+                         FeedingPenalty = "Animal and bagged blood slake no Hunger. Slake 2 less Hunger per human. Must drain and kill a human to reduce Hunger below 3."
+                     },
+                     new BloodPotency()
+                     {
+                         Level = 9,
+                         BloodSurge = 6,
+                         DamageMendedPerRouse = 4,
+                         DisciplinePowerBonues = 4,
+                         DisciplineRouseCheckReroll = "Level 5 and below.",
+                         BaneSeverity = 6,
+                         FeedingPenalty = "Animal and bagged blood slake no Hunger. Slake 2 less Hunger per human. Must drain and kill a human to reduce Hunger below 3."
+                     },
+                     new BloodPotency()
+                     {
+                         Level = 10,
+                         BloodSurge = 6,
+                         DamageMendedPerRouse = 5,
+                         DisciplinePowerBonues = 5,
+                         DisciplineRouseCheckReroll = "Level 5 and below.",
+                         BaneSeverity = 6,
+                         FeedingPenalty = "Animal and bagged blood slake no Hunger. Slake 2 less Hunger per human. Must drain and kill a human to reduce Hunger below 3."
+                     }
+                };
+
+                await _context.AddRangeAsync(bloodpotencies);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("*************  ERROR  *************");
+                Console.WriteLine("Error Seeding BloodPotency.");
                 Console.WriteLine(ex.Message);
                 Console.WriteLine("***********************************");
                 throw;

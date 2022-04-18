@@ -1,0 +1,79 @@
+﻿@using VtM.Enums
+@model IEnumerable<VtM.Models.BloodPotency>
+
+@{
+    ViewData["Title"] = "Blood Potencies";
+}
+
+<h1>Blood Potencies</h1>
+
+<p>
+    @if (User.IsInRole(Roles.Admin.ToString()) || User.IsInRole(Roles.StoryTeller.ToString()))
+    {
+        <a asp-action="Create">Create New</a>
+    }
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Level)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BloodSurge)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DamageMendedPerRouse)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DisciplinePowerBonues)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BaneSeverity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DisciplineRouseCheckReroll)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FeedingPenalty)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Level)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BloodSurge)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DamageMendedPerRouse)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DisciplinePowerBonues)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BaneSeverity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DisciplineRouseCheckReroll)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FeedingPenalty)
+            </td>
+            <td>
+                @if (User.IsInRole(Roles.Admin.ToString()) || User.IsInRole(Roles.StoryTeller.ToString()))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a><text> | </text>
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        
+                    }
+              
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

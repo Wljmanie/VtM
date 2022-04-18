@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -52,6 +53,7 @@ namespace VtM.Controllers
         }
 
         // GET: Clans/Create
+        [Authorize]
         public IActionResult Create()
         {
             if (User.IsInRole(Roles.Admin.ToString())
@@ -68,6 +70,7 @@ namespace VtM.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("Name,Bane,Compulsion,BookId,FormFile")] Clan clan)
         {
             
@@ -90,6 +93,7 @@ namespace VtM.Controllers
         }
 
         // GET: Clans/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (User.IsInRole(Roles.Admin.ToString())
@@ -105,7 +109,7 @@ namespace VtM.Controllers
                 {
                     return NotFound();
                 }
-                ViewData["BookId"] = new SelectList(_context.Books, "Id", "Id", clan.BookId);
+                ViewData["BookId"] = new SelectList(_context.Books, "Id", "Title", clan.BookId);
                 return View(clan);
             }
             return RedirectToAction(nameof(Index));
@@ -116,7 +120,8 @@ namespace VtM.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Bane,Compulsion,BookId,FileName,FileData,FileContentType")] Clan clan)
+        [Authorize]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Bane,Compulsion,BookId")] Clan clan, IFormFile formFile)
         {
             if (id != clan.Id)
             {
@@ -127,7 +132,27 @@ namespace VtM.Controllers
             {
                 try
                 {
-                    _context.Update(clan);
+                    Clan newClan = await _context.Clans.FirstOrDefaultAsync(c => c.Id == clan.Id);
+
+                    if(newClan.Bane != clan.Bane) newClan.Bane = clan.Bane;
+                    if(newClan.BookId != clan.BookId) newClan.BookId = clan.BookId;
+                    if(newClan.Compulsion != clan.Compulsion) newClan.Compulsion = clan.Compulsion;
+                    if(newClan.Name != clan.Name) newClan.Name = clan.Name;
+
+
+                    if(formFile != null)
+                    {
+                        //replace the formfile
+                        newClan.FileData = await _imageService.EncodeImageAsync(formFile);
+                        newClan.FileContentType = _imageService.ContentType(formFile);
+                        newClan.FileName = formFile.FileName;
+
+
+                    }
+                    
+
+
+                    _context.Update(newClan);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -143,11 +168,12 @@ namespace VtM.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BookId"] = new SelectList(_context.Books, "Id", "Id", clan.BookId);
+            ViewData["BookId"] = new SelectList(_context.Books, "Id", "Title", clan.BookId);
             return View(clan);
         }
 
         // GET: Clans/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (User.IsInRole(Roles.Admin.ToString())
@@ -174,6 +200,7 @@ namespace VtM.Controllers
         // POST: Clans/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var clan = await _context.Clans.FindAsync(id);

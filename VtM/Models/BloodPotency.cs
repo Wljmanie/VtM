@@ -16,6 +16,8 @@ namespace VtM.Models
         [Range(0,6)]
         public int BaneSeverity { get; set; }
 
+        public string DisciplineRouseCheckReroll { get; set; }
+
         public string FeedingPenalty { get; set; } = null!;
 
     }

@@ -1,0 +1,63 @@
+﻿@model VtM.Models.BloodPotency
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>BloodPotency</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Level" class="control-label"></label>
+                <input asp-for="Level" class="form-control" />
+                <span asp-validation-for="Level" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BloodSurge" class="control-label"></label>
+                <input asp-for="BloodSurge" class="form-control" />
+                <span asp-validation-for="BloodSurge" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DamageMendedPerRouse" class="control-label"></label>
+                <input asp-for="DamageMendedPerRouse" class="form-control" />
+                <span asp-validation-for="DamageMendedPerRouse" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DisciplinePowerBonues" class="control-label"></label>
+                <input asp-for="DisciplinePowerBonues" class="form-control" />
+                <span asp-validation-for="DisciplinePowerBonues" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BaneSeverity" class="control-label"></label>
+                <input asp-for="BaneSeverity" class="form-control" />
+                <span asp-validation-for="BaneSeverity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DisciplineRouseCheckReroll" class="control-label"></label>
+                <input asp-for="DisciplineRouseCheckReroll" class="form-control" />
+                <span asp-validation-for="DisciplineRouseCheckReroll" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FeedingPenalty" class="control-label"></label>
+                <input asp-for="FeedingPenalty" class="form-control" />
+                <span asp-validation-for="FeedingPenalty" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

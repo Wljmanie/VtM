@@ -1,4 +1,6 @@
-﻿@model VtM.Models.Clan
+﻿@using VtM.Services.Interfaces
+@model VtM.Models.Clan
+@inject IImageService imageService
 
 @{
     ViewData["Title"] = "Delete";
@@ -11,6 +13,13 @@
     <h4>Clan</h4>
     <hr />
     <dl class="row">
+        <dt>
+            @if(Model.FileData != null && Model.FileContentType != null)
+            {
+                <img class="img-fluid" width="200" src="@imageService.DecodeImage(Model.FileData, Model.FileContentType)" />  
+            }
+            <!--TODO: Otherwise default image?-->
+        </dt>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
         </dt>
@@ -33,26 +42,9 @@
             @Html.DisplayNameFor(model => model.Book)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Book.Id)
+            @Html.DisplayFor(model => model.Book.Title)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FileName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FileName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FileData)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FileData)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FileContentType)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FileContentType)
-        </dd>
+        
     </dl>
     
     <form asp-action="Delete">

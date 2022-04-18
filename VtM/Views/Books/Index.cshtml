@@ -2,7 +2,7 @@
 @model IEnumerable<VtM.Models.Book>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Books";
 }
 
 <h1>Books Overview</h1>
@@ -32,7 +32,7 @@
             <td>
                 @if (User.IsInRole(Roles.Admin.ToString()) || User.IsInRole(Roles.StoryTeller.ToString()))
                 {
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> 
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a><text> | </text> 
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>   
                 }
                  

@@ -9,8 +9,8 @@
 <h4>Clan</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+    <div class="col-md-6">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
@@ -20,12 +20,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Bane" class="control-label"></label>
-                <input asp-for="Bane" class="form-control" />
+                <textarea rows="10" asp-for="Bane" class="form-control"></textarea>
                 <span asp-validation-for="Bane" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Compulsion" class="control-label"></label>
-                <input asp-for="Compulsion" class="form-control" />
+                <textarea rows="10" asp-for="Compulsion" class="form-control"></textarea>
                 <span asp-validation-for="Compulsion" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -34,19 +34,9 @@
                 <span asp-validation-for="BookId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FileName" class="control-label"></label>
-                <input asp-for="FileName" class="form-control" />
-                <span asp-validation-for="FileName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FileData" class="control-label"></label>
-                <input asp-for="FileData" class="form-control" />
-                <span asp-validation-for="FileData" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FileContentType" class="control-label"></label>
-                <input asp-for="FileContentType" class="form-control" />
-                <span asp-validation-for="FileContentType" class="text-danger"></span>
+                <label asp-for="FormFile" class="control-label"></label>
+                <input type="file" asp-for="FormFile" class="form-control" />
+                <span asp-validation-for="FormFile" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
