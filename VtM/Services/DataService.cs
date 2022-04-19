@@ -28,6 +28,7 @@ namespace VtM.Services
             await SeedClans();
             await SeedBloodPotency();
             await SeedDisciplines();
+            await SeedSkills();
         }
 
         private async Task SeedRolesAsync()
@@ -413,6 +414,56 @@ namespace VtM.Services
             {
                 Console.WriteLine("*************  ERROR  *************");
                 Console.WriteLine("Error Seeding Disciples.");
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("***********************************");
+                throw;
+            }
+        }
+
+        private async Task SeedSkills()
+        {
+            if (_context.Skills.Any()) return;
+            try
+            {
+                IList<Skill> skills = new List<Skill>() {
+                    new Skill(){SkillName = "Atheletics", SkillType = SkillType.Physical, BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id },
+                    new Skill(){SkillName = "Brawl", SkillType = SkillType.Physical, BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id },
+                    new Skill(){SkillName = "Craft", SkillType = SkillType.Physical, BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id },
+                    new Skill(){SkillName = "Drive", SkillType = SkillType.Physical, BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id },
+                    new Skill(){SkillName = "Firearms", SkillType = SkillType.Physical, BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id },
+                    new Skill(){SkillName = "Larceny", SkillType = SkillType.Physical, BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id },
+                    new Skill(){SkillName = "Melee", SkillType = SkillType.Physical, BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id },
+                    new Skill(){SkillName = "Stealth", SkillType = SkillType.Physical, BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id },
+                    new Skill(){SkillName = "Survival", SkillType = SkillType.Physical, BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id },
+                    
+                    new Skill(){SkillName = "Animal Ken", SkillType = SkillType.Social, BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id },
+                    new Skill(){SkillName = "Etiquette", SkillType = SkillType.Social, BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id },
+                    new Skill(){SkillName = "Insight", SkillType = SkillType.Social, BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id },
+                    new Skill(){SkillName = "Intimidation", SkillType = SkillType.Social, BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id },
+                    new Skill(){SkillName = "Leadership", SkillType = SkillType.Social, BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id },
+                    new Skill(){SkillName = "Performance", SkillType = SkillType.Social, BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id },
+                    new Skill(){SkillName = "Persuasion", SkillType = SkillType.Social, BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id },
+                    new Skill(){SkillName = "Streetwise", SkillType = SkillType.Social, BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id },
+                    new Skill(){SkillName = "Subterfuge", SkillType = SkillType.Social, BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id },
+                    
+                    new Skill(){SkillName = "Academics", SkillType = SkillType.Mental, BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id },
+                    new Skill(){SkillName = "Awareness", SkillType = SkillType.Mental, BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id },
+                    new Skill(){SkillName = "Finance", SkillType = SkillType.Mental, BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id },
+                    new Skill(){SkillName = "Investigation", SkillType = SkillType.Mental, BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id },
+                    new Skill(){SkillName = "Medicine", SkillType = SkillType.Mental, BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id },
+                    new Skill(){SkillName = "Occult", SkillType = SkillType.Mental, BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id },
+                    new Skill(){SkillName = "Politics", SkillType = SkillType.Mental, BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id },
+                    new Skill(){SkillName = "Science", SkillType = SkillType.Mental, BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id },
+                    new Skill(){SkillName = "Technology", SkillType = SkillType.Mental, BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id }
+                };
+
+                await _context.AddRangeAsync(skills);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("*************  ERROR  *************");
+                Console.WriteLine("Error Seeding Skills.");
                 Console.WriteLine(ex.Message);
                 Console.WriteLine("***********************************");
                 throw;

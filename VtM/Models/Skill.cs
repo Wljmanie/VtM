@@ -1,9 +1,13 @@
-﻿namespace VtM.Models
+﻿using VtM.Enums;
+
+namespace VtM.Models
 {
     public class Skill
     {
         public int Id { get; set; }
-        public int SkillName { get; set; }
+        public string SkillName { get; set; }
+
+        public SkillType SkillType { get; set; }
 
         public string? DescriptionLevel1 { get; set; }
         public string? DescriptionLevel2 { get; set; }
