@@ -29,6 +29,7 @@ namespace VtM.Services
             await SeedBloodPotency();
             await SeedDisciplines();
             await SeedSkills();
+            await SeedChronicle();
         }
 
         private async Task SeedRolesAsync()
@@ -464,6 +465,26 @@ namespace VtM.Services
             {
                 Console.WriteLine("*************  ERROR  *************");
                 Console.WriteLine("Error Seeding Skills.");
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("***********************************");
+                throw;
+            }
+        }
+
+        private async Task SeedChronicle()
+        {
+            if (_context.Chronicles.Any()) return;
+            try
+            {
+                Chronicle chronicle = new Chronicle() { Name = "Test By Night.", StoryTellerId = _context.Users.FirstOrDefault(u => u.UserName == "StoryTeller@gmail.com").Id };
+
+                await _context.AddAsync(chronicle);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("*************  ERROR  *************");
+                Console.WriteLine("Error Seeding Chronicle.");
                 Console.WriteLine(ex.Message);
                 Console.WriteLine("***********************************");
                 throw;

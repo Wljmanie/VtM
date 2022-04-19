@@ -7,6 +7,8 @@ namespace VtM.Models
 {
     public class VtMUser : IdentityUser
     {
+   
+
         public string NickName { get; set; } = null!;
 
         //-- Image --//
@@ -22,6 +24,7 @@ namespace VtM.Models
         public string? FileContentType { get; set; }
 
         public virtual ICollection<Character> Characters { get; set; } = new HashSet<Character>();
+        
 
 
     }

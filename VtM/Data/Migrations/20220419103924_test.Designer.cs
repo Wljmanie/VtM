@@ -12,8 +12,8 @@ using VtM.Data;
 namespace VtM.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220417130245_Initial_001")]
-    partial class Initial_001
+    [Migration("20220419103924_test")]
+    partial class test
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -211,6 +211,10 @@ namespace VtM.Data.Migrations
 
                     b.Property<int>("DisciplinePowerBonues")
                         .HasColumnType("int");
+
+                    b.Property<string>("DisciplineRouseCheckReroll")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FeedingPenalty")
                         .IsRequired()
@@ -569,9 +573,6 @@ namespace VtM.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("BookId")
-                        .HasColumnType("int");
-
                     b.Property<string>("FileContentType")
                         .HasColumnType("nvarchar(max)");
 
@@ -586,8 +587,6 @@ namespace VtM.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BookId");
 
                     b.ToTable("Disciplines");
                 });
@@ -1103,7 +1102,11 @@ namespace VtM.Data.Migrations
                     b.Property<string>("DescriptionLevel5")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SkillName")
+                    b.Property<string>("SkillName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SkillType")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -1219,9 +1222,6 @@ namespace VtM.Data.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ChronicleId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -1280,8 +1280,6 @@ namespace VtM.Data.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ChronicleId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -1418,7 +1416,7 @@ namespace VtM.Data.Migrations
                         .HasForeignKey("BloodPotencyId");
 
                     b.HasOne("VtM.Models.Chronicle", "Chronicle")
-                        .WithMany()
+                        .WithMany("Characters")
                         .HasForeignKey("ChronicleId");
 
                     b.HasOne("VtM.Models.Clan", "Clan")
@@ -1516,17 +1514,6 @@ namespace VtM.Data.Migrations
                     b.Navigation("Character");
 
                     b.Navigation("Coterie");
-                });
-
-            modelBuilder.Entity("VtM.Models.Discipline", b =>
-                {
-                    b.HasOne("VtM.Models.Book", "Book")
-                        .WithMany()
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Book");
                 });
 
             modelBuilder.Entity("VtM.Models.DisciplineLevel", b =>
@@ -1778,13 +1765,6 @@ namespace VtM.Data.Migrations
                     b.Navigation("Character");
                 });
 
-            modelBuilder.Entity("VtM.Models.VtMUser", b =>
-                {
-                    b.HasOne("VtM.Models.Chronicle", null)
-                        .WithMany("Players")
-                        .HasForeignKey("ChronicleId");
-                });
-
             modelBuilder.Entity("VtM.Models.Weapon", b =>
                 {
                     b.HasOne("VtM.Models.Book", "Book")
@@ -1838,7 +1818,7 @@ namespace VtM.Data.Migrations
 
             modelBuilder.Entity("VtM.Models.Chronicle", b =>
                 {
-                    b.Navigation("Players");
+                    b.Navigation("Characters");
                 });
 
             modelBuilder.Entity("VtM.Models.Coterie", b =>

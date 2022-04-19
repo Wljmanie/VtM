@@ -9,7 +9,18 @@ namespace VtM.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+
         }
+
+       /* protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<ChroniclePlayer>()
+                .HasKey(x => new { x.ChronicleId, x.PlayerId });
+            modelBuilder.Entity<VtMUser>().HasMany(u => u.ChroniclePlayers)
+                .WithOne(u => u.Player).OnDelete(DeleteBehavior.NoAction);
+            
+        }*/
 
         public DbSet<Background>? Backgrounds { get; set; }
         public DbSet<BloodPotency>? BloodPotencies { get; set; }
@@ -42,14 +53,9 @@ namespace VtM.Data
         public DbSet<VtMUser>? VtMUsers { get; set; }
         public DbSet<Weapon>? Weapons { get; set; }
 
+        
 
-
-
-
-
-
-
-
+       
 
 
 

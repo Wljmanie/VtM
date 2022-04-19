@@ -1220,9 +1220,6 @@ namespace VtM.Data.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ChronicleId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -1281,8 +1278,6 @@ namespace VtM.Data.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ChronicleId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -1419,7 +1414,7 @@ namespace VtM.Data.Migrations
                         .HasForeignKey("BloodPotencyId");
 
                     b.HasOne("VtM.Models.Chronicle", "Chronicle")
-                        .WithMany()
+                        .WithMany("Characters")
                         .HasForeignKey("ChronicleId");
 
                     b.HasOne("VtM.Models.Clan", "Clan")
@@ -1768,13 +1763,6 @@ namespace VtM.Data.Migrations
                     b.Navigation("Character");
                 });
 
-            modelBuilder.Entity("VtM.Models.VtMUser", b =>
-                {
-                    b.HasOne("VtM.Models.Chronicle", null)
-                        .WithMany("Players")
-                        .HasForeignKey("ChronicleId");
-                });
-
             modelBuilder.Entity("VtM.Models.Weapon", b =>
                 {
                     b.HasOne("VtM.Models.Book", "Book")
@@ -1828,7 +1816,7 @@ namespace VtM.Data.Migrations
 
             modelBuilder.Entity("VtM.Models.Chronicle", b =>
                 {
-                    b.Navigation("Players");
+                    b.Navigation("Characters");
                 });
 
             modelBuilder.Entity("VtM.Models.Coterie", b =>

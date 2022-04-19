@@ -12,8 +12,8 @@ using VtM.Data;
 namespace VtM.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220419060822_UpdateSkill")]
-    partial class UpdateSkill
+    [Migration("20220419090627_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -1102,8 +1102,9 @@ namespace VtM.Data.Migrations
                     b.Property<string>("DescriptionLevel5")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SkillName")
-                        .HasColumnType("int");
+                    b.Property<string>("SkillName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SkillType")
                         .HasColumnType("int");
@@ -1221,9 +1222,6 @@ namespace VtM.Data.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ChronicleId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -1282,8 +1280,6 @@ namespace VtM.Data.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ChronicleId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -1420,7 +1416,7 @@ namespace VtM.Data.Migrations
                         .HasForeignKey("BloodPotencyId");
 
                     b.HasOne("VtM.Models.Chronicle", "Chronicle")
-                        .WithMany()
+                        .WithMany("ChroniclePlayers")
                         .HasForeignKey("ChronicleId");
 
                     b.HasOne("VtM.Models.Clan", "Clan")
@@ -1769,13 +1765,6 @@ namespace VtM.Data.Migrations
                     b.Navigation("Character");
                 });
 
-            modelBuilder.Entity("VtM.Models.VtMUser", b =>
-                {
-                    b.HasOne("VtM.Models.Chronicle", null)
-                        .WithMany("Players")
-                        .HasForeignKey("ChronicleId");
-                });
-
             modelBuilder.Entity("VtM.Models.Weapon", b =>
                 {
                     b.HasOne("VtM.Models.Book", "Book")
@@ -1829,7 +1818,7 @@ namespace VtM.Data.Migrations
 
             modelBuilder.Entity("VtM.Models.Chronicle", b =>
                 {
-                    b.Navigation("Players");
+                    b.Navigation("ChroniclePlayers");
                 });
 
             modelBuilder.Entity("VtM.Models.Coterie", b =>
