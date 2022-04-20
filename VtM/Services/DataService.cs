@@ -30,6 +30,7 @@ namespace VtM.Services
             await SeedDisciplines();
             await SeedSkills();
             await SeedChronicle();
+            await SeedPredatorTypes();
         }
 
         private async Task SeedRolesAsync()
@@ -485,6 +486,118 @@ namespace VtM.Services
             {
                 Console.WriteLine("*************  ERROR  *************");
                 Console.WriteLine("Error Seeding Chronicle.");
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("***********************************");
+                throw;
+            }
+        }
+
+        private async Task SeedPredatorTypes()
+        {
+            if (_context.PredatorTypes.Any()) return;
+            try
+            {
+                IList<PredatorType> predatorTypes = new List<PredatorType>() {
+                     new PredatorType()
+                     { 
+                         Name = "Alleycat",
+                         Description = "A combative assault-feeder, you stalk, overpower, and drink from whomever you can, when you can. You may or may not attempt to threaten or Dominate victims into silence or mask the feeding as a robbery. Think about how you arrived at this direct approach to feeding and what makes you comfortable with an unlife of stalking, attacking, feeding, and escaping. You could have been homeless, an SAS soldier, a cartel hit-man, or a big-game hunter. ■ Add a specialty: Intimidation (Stickups) or Brawl(Grappling) ■ Gain one dot of Celerity or Potence ■ Lose one dot of Humanity ■ Gain three dots of criminal Contacts",
+                         HuntingRole = " Strength + Brawl: You take blood by force or threat, stalking, overpowering, and bleedings your victims. If you feed on criminals as a sort of dark knight of the streets, use Wits + Streetwise to find a victim.",
+                         BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id
+                     },
+                     new PredatorType()
+                     {
+                         Name = "Bagger",
+                         Description = "You steal, buy, or otherwise procure cold blood rather than hunt, relying on the black market or your skills as a burglar or ambulance chaser. Perhaps you still work the night shift at the hospital. Ventrue may not pick this Predator type. ■ Add a specialty: Larceny(Lockpicking) or Streetwise(Black Market) ■ Gain one dot of Blood Sorcery (Tremere only) or Obfuscate ■ Gain the Feeding Merit: Iron Gullet(•••) ■ Gain the Enemy Flaw: (••)Either someone believes you owe them, or there’s another reason you keep off the streets.",
+                         HuntingRole = "Intelligence + Streetwise: You acquire preserved blood rather than hunt, or you feed from the dead or dying. Find your prize, gain access, and purchase or otherwise convince someone with the goods to give you access.",
+                         BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id
+                     },
+                     new PredatorType()
+                     {
+                         Name = "Blood Leech",
+                         Description = "You drink from other vampires, either by hunting, coercion or by taking Blood as payment - the only truly moral way of feeding you can think of. Unfortunately, this practice is usually forbidden in Kindred society. It is either risky as all fuck or requires a position of enviable power. ■ Add a specialty: Brawl(Kindred) or Stealth(against Kindred) ■ Gain one dot of Celerity or Protean ■ Lose one dot of Humanity ■ Increase Blood Potency by one ■ Gain the Dark Secret Flaw: (••) Diablerist, or the Shunned Flaw: (••) ■ Gain the Feeding Flaw: (••) Prey Exclusion(mortals)",
+                         HuntingRole = " You feed from other vampires; if you make a mistake, you die – either tonight, or in a blood hunt. The Storyteller should not abstract something like this to a set of die rolls.",
+                         BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id
+                     },
+                     new PredatorType()
+                     {
+                         Name = "Cleaver",
+                         Description = "You feed covertly from your (or someone’s) mortal family and friends with whom you still maintain ties.The most extreme cleavers adopt children, marry a human, and try to maintain a family life for as long as they can.Add your family to the Relationship Map. Cleavers often go to great lengths to keep the truth of their condition from their family, but some also maintain unwholesome relationships with their own kin. The Camarilla forbids taking a human family in this fashion, and it frowns on cleavers as Masquerade breaches waiting to happen.Wiser Kindred may massacre your family for your own good if they find out your secret and care what happens to you. ■ Add a specialty: Persuasion(Gaslighting) or Subterfuge(Coverups) ■ Gain one dot of Dominate or Animalism ■ Gain the Dark Secret Flaw: (•)Cleaver ■ Gain the Herd Advantage(••)",
+                         HuntingRole = " Manipulation + Subterfuge: You take blood covertly from your mortal family or friends. Socialize with your victims, feed from them, and cover it up to groom them for next time.",
+                         BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id
+                     },
+                     new PredatorType()
+                     {
+                         Name = "Consensualist",
+                         Description = "You never feed against your victim’s free will. You masquerade as a representative of a charity blood drive, as a blood-drinking kink-lord in the “real vampire community,” or by actually telling your victims what you are and getting their permission to feed. The Camarilla call that last method a Masquerade breach, but many Anarch philosophers consider it an acceptable risk. You could have been anything in life, but a sex-worker, a political organizer, or a lawyer could all be wary of feeding without consent. ■ Add a specialty: Medicine(Phlebotomy) or Persuasion(Vessels) ■ Gain one dot of Auspex or Fortitude ■ Gain one dot of Humanity ■ Gain the Dark Secret Flaw: (•) Masquerade Breacher ■ Gain the Feeding Flaw: (•) Prey Exclusion(nonconsenting)",
+                         HuntingRole = " Manipulation + Persuasion: You take blood by consent, under cover of medical work or a shared kink. Cultivate your victims, feed from them, and validate their choice to feed you.",
+                         BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id
+                     },
+                     new PredatorType()
+                     {
+                         Name = "Farmer",
+                         Description = "You only feed from animals. Your Hunger constantly gnaws at you, but you have not killed a single human being so far (except perhaps that one time), and you intend to keep it that way. You could have been anyone in life, but your choice speaks to someone obsessed by morality. Perhaps you were an activist, priest, aidworker, or vegan in life, but the choice never to risk a human life is one anyone could arrive at and struggle to maintain. Ventrue may not pick this Predator type. You cannot pick this Predator type if your Blood Potency is 3 or higher. ■ Add a specialty: Animal Ken(Specific Animal) or Survival(Hunting) ■ Gain one dot of Animalism or Protean ■ Gain one dot of Humanity ■ Gain the Feeding Flaw: (••) Farmer",
+                         HuntingRole = "Composure + Animal Ken: You feed from animals. Find your quarry, catch your chosen animal, and feed from it.",
+                         BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id
+                     },
+                     new PredatorType()
+                     {
+                         Name = "Osiris",
+                         Description = "You are a celebrity among mortals or else you run a cult, a church, or something similar. You feed from your fans or worshippers, who treat you as a deity. You always have access to easy blood, but followers breed problems with the authorities, organized religion, and indeed the Camarilla. In life, you might have been a DJ, a writer, a cultist, a preacher, or a LARP organizer.■ Add a specialty: Occult(specific tradition) or Performance(specific entertainment field) ■ Gain one dot of Blood Sorcery(Tremere only) or Presence ■ Spend three dots between the Fame and Herd Backgrounds ■ Spend two dots between the Enemies and Mythic Flaws",
+                         HuntingRole = "Manipulation + Subterfuge or Intimidation + Fame: You feed from your fans, church, or other adoring crowd. The Skill for which you’re famous may be Performance, Science, Craft, Academics, Politics, or something else.Display yourself, choose a victim, and flatter or bully them into feeding you.",
+                         BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id
+                     },
+                     new PredatorType()
+                     {
+                         Name = "Sandman",
+                         Description = "You rely on your stealth or Disciplines to feed from sleeping victims. If they never wake during the feeding, they won’t know you exist. Perhaps you were very anti-social in life; you don’t feel cut out for the intense interpersonal nightlife or physical violence of more extroverted hunters. ■ Add a specialty: Medicine(Anesthetics) or Stealth (Break-in) ■ Gain one dot of Auspex or Obfuscate ■ Gain one dot of Resources",
+                         HuntingRole = " Dexterity + Stealth: You feed from sleeping victims. Case a hotel or house, break in, feed silently and get out.",
+                         BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id
+                     },
+                     new PredatorType()
+                     {
+                         Name = "Scene Queen",
+                         Description = "You rely on your familiarity with a certain subculture and a wellcrafted pose, feeding on an exclusive subculture that believes you to be one of them. Your victims adore you for your status in the scene, and the ones who understand what you are disbelieved. You may belong to the street or be literal upper -class, abusing the weak with false hope and promises of taking them to the next level.In life, you almost certainly belonged to a scene similar to the one you stalk now. ■ Add a specialty: Etiquette (specific scene), Leadership (specific scene), or Streetwise (specific scene) ■ Gain one dot of Dominate or Potence ■ Gain the Fame Advantage: (•) ■ Gain the Contact Advantage: (•) ■ Gain either the Influence Flaw: (•) Disliked(outside your subculture) or the Feeding Flaw: (•) Prey Exclusion(a different subculture from yours)",
+                         HuntingRole = "Manipulation + Persuasion: You feed from a highor low-class subculture in which you enjoy high status.Make the scene, groom and isolate a victim from whom to feed, and gaslight or silence them to keep the scene cool. \"I’ll let the others see us together if you keep it together.\"",
+                         BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id
+                     },
+                     new PredatorType()
+                     {
+                         Name = "Siren",
+                         Description = "You feed almost exclusively during or while feigning sex, and you rely on your Disciplines, seduction skills, or the unquenchable appetites of others to conceal your carnivorous nature. You have mastered the art of the onenight stand or move through the sex - club scene like a dark star. You think of yourself as a sexy beast, but in your darkest moments, you fear that you're at best a problematic lover, at worst a habitual rapist.A former lover who escaped destruction might be your Touchstone or your stalker. (If so, add them to the Relationship Map.) Maybe in life you were a pick - up artist, movie producer, author, a glorious slutty kinkster– or a virgin who intends to make up for lost time post - mortem. ■ Add a specialty: Persuasion (Seduction) or Subterfuge (Seduction) ■ Gain one dot of Fortitude or Presence ■ Gain the Looks Merit: (••) Beautiful ■ Gain the Enemy Flaw: (•) A spurned lover or jealous partner ■",
+                         HuntingRole = "Charisma + Subterfuge: You feed under the guise of sex. Pick up your victim, charm them, and take them somewhere alone to feed.",
+                         BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id
+                     },
+                     new PredatorType()
+                     {
+                         Name = "Extortionist",
+                         Description = "The extortionist likes to force their victims to bleed for them. Ostensibly, the extortionist acquires blood in exchange for services such as security or surveillance, but as many times as the need for protection is real, it is just as often a fiction engineered to make the deal feel acceptable. • Add a specialty: Intimidation (Coercion) or Larceny (Security) • Gain one dot of Dominate or Potence • Spend three dots between the Contacts and Resources Backgrounds • Gain the Enemy Flaw: (••) The police or a victim who escaped your extortion and now wants revenge",
+                         HuntingRole =  " Strength or Manipulation + Intimidation, you feed through coercion both subtle and painfully obvious.",
+                         BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Cult of the Blood Gods")).Id
+                     },
+                     new PredatorType()
+                     {
+                         Name = "Graverobber",
+                         Description = "Graverobbers often feed from fresh corpses, but despite their name, they prefer feeding from mourners in cemeteries and sad, frightened visitors and patients in hospitals. Melancholic Resonance in a victim’s blood appeals more than any other humour. This predator type often requires the vampire to hold a haven in or connections to a church, hospital, or morgue. • Add a specialty: Occult(Grave Rituals) or Medicine(Cadavers) • Gain one dot of Fortitude or Oblivion • Gain the Feeding Merit: (•••) Iron Gullet • Gain the Haven Advantage: (•) • Gain the Herd Flaw: (••) Obvious Predator(your cold nature makes you act in a deeply unsettling matter when hunting)",
+                         HuntingRole =  "Resolve + Medicine, sifting through the quiet dead for a body bearing rancid blood.Moving among miserable mortals for a vulnerable bite uses Manipulation + Insight.A cold corpse can slake up to 3 Hunger, but suffers the same slake penalties as bagged blood.A body fed from soon before death, drained of blood afterwards, or missing parts will slake less.",
+                         BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Cult of the Blood Gods")).Id
+                     },
+                     new PredatorType()
+                     {
+                         Name = "Importuanate Charmer",
+                         Description = "The pushy person likes to convince their victims by nagging and persuade them to give up their blood. Often lying about what they get in return or just make it sound there is something in it for them. ■ Add a specialty: Persuasion(importunate) ■ Gain one dot of Dominate ■ Spend three dots between the Contacts and Resources Backgrounds. ■ Gain the Enemy Flaw: (••) The police or a victim who realises how bad the choice was afterwards now wants revenge.",
+                         HuntingRole = "Manipulation + Persuasion",
+                         BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("N/A")).Id
+                     }
+                };
+
+                await _context.AddRangeAsync(predatorTypes);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("*************  ERROR  *************");
+                Console.WriteLine("Error Seeding Books.");
                 Console.WriteLine(ex.Message);
                 Console.WriteLine("***********************************");
                 throw;
