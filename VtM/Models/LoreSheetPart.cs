@@ -11,6 +11,6 @@ namespace VtM.Models
         [Range(1,5)]
         public int Level { get; set; }
 
-        public virtual LoreSheet LoreSheet { get; set; } = null!;
+        public virtual LoreSheet? LoreSheet { get; set; }
     }
 }

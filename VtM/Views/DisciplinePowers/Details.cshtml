@@ -1,0 +1,96 @@
+﻿@model VtM.Models.DisciplinePower
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>DisciplinePower</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AmalgramLevel)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AmalgramLevel)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DisciplineLevel)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DisciplineLevel)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RouseCost)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RouseCost)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AdditionalCost)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AdditionalCost)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DisciplinePowerName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DisciplinePowerName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DisciplinePowerDescription)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DisciplinePowerDescription)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Duration)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Duration)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.System)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.System)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RollDescription)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RollDescription)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CounterRollDescription)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CounterRollDescription)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Discipline)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Discipline.Id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Amalgram)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Amalgram.Id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Book)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Book.Id)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

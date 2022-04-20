@@ -1,0 +1,107 @@
+﻿@model IEnumerable<VtM.Models.DisciplinePower>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AmalgramLevel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DisciplineLevel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RouseCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdditionalCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DisciplinePowerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DisciplinePowerDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Duration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.System)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RollDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CounterRollDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Discipline)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amalgram)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AmalgramLevel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DisciplineLevel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RouseCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdditionalCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DisciplinePowerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DisciplinePowerDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.System)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RollDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CounterRollDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Discipline.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amalgram.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Book.Id)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

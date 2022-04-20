@@ -1,0 +1,47 @@
+﻿@using VtM.Enums
+@model VtM.Models.LoreSheetPart
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>LoreSheetPart</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Level)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Level)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LoreSheet)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LoreSheet.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    @if (User.IsInRole(Roles.Admin.ToString()) || User.IsInRole(Roles.StoryTeller.ToString()))
+    {
+        <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a><text> | </text>
+    
+          }
+    <a asp-action="Index">Back to List</a>
+</div>

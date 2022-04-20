@@ -6,6 +6,6 @@
         public string Name { get; set; }
         public string? Description { get; set; }
         public int BookId { get; set; }
-        public virtual Book Book { get; set; } = null!;
+        public virtual Book? Book { get; set; }
     }
 }

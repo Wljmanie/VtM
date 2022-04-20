@@ -9,7 +9,7 @@ namespace VtM.Models
         public int? DisciplineId { get; set; }
         [ForeignKey("Amalgram")]
         public int? AmalgamId { get; set; }
-        [Range(1, 5)]
+        [Range(0, 5)]
         public int? AmalgramLevel { get; set; }
         [Range(1,5)]
         public int DisciplineLevel { get; set; }
@@ -17,6 +17,8 @@ namespace VtM.Models
         public string? AdditionalCost { get; set; }
         public string DisciplinePowerName { get; set; } = null!;
         public string? DisciplinePowerDescription { get; set; }
+        public string? Duration { get; set; }
+        public string? System { get; set; }
         
 
         //Should grab those differently
@@ -26,7 +28,7 @@ namespace VtM.Models
         public virtual Discipline? Discipline { get; set; }
         public virtual Discipline? Amalgram { get; set; }
 
-        public int BookId { get; set; }
-        public virtual Book Book { get; set; } = null!;
+        public int? BookId { get; set; }
+        public virtual Book? Book { get; set; }
     }
 }

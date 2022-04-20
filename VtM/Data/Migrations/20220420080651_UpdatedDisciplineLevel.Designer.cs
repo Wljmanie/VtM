@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VtM.Data;
 
@@ -11,9 +12,10 @@ using VtM.Data;
 namespace VtM.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220420080651_UpdatedDisciplineLevel")]
+    partial class UpdatedDisciplineLevel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -654,17 +656,11 @@ namespace VtM.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Duration")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("RollDescription")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RouseCost")
                         .HasColumnType("int");
-
-                    b.Property<string>("System")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
