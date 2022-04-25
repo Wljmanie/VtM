@@ -3,11 +3,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using VtM.Data;
+using VtM.Enums;
 using VtM.Models;
+
+
 
 namespace VtM.Controllers
 {
@@ -23,7 +27,7 @@ namespace VtM.Controllers
         // GET: DisciplinePowers
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.DisciplinePowers.Include(d => d.Amalgram).Include(d => d.Book).Include(d => d.Discipline);
+            var applicationDbContext = _context.DisciplinePowers.Include(d => d.Amalgam).Include(d => d.Book).Include(d => d.Discipline);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -36,7 +40,7 @@ namespace VtM.Controllers
             }
 
             var disciplinePower = await _context.DisciplinePowers
-                .Include(d => d.Amalgram)
+                .Include(d => d.Amalgam)
                 .Include(d => d.Book)
                 .Include(d => d.Discipline)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -49,12 +53,18 @@ namespace VtM.Controllers
         }
 
         // GET: DisciplinePowers/Create
+        [Authorize]
         public IActionResult Create()
         {
-            ViewData["AmalgamId"] = new SelectList(_context.Disciplines, "Id", "Id");
-            ViewData["BookId"] = new SelectList(_context.Books, "Id", "Id");
-            ViewData["DisciplineId"] = new SelectList(_context.Disciplines, "Id", "Id");
-            return View();
+            if (User.IsInRole(Roles.Admin.ToString())
+                || User.IsInRole(Roles.StoryTeller.ToString()))
+            {
+                ViewData["AmalgamId"] = new SelectList(_context.Disciplines, "Id", "Name");
+                ViewData["BookId"] = new SelectList(_context.Books, "Id", "Title");
+                ViewData["DisciplineId"] = new SelectList(_context.Disciplines, "Id", "Name");
+                return View();
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: DisciplinePowers/Create
@@ -62,6 +72,7 @@ namespace VtM.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("Id,DisciplineId,AmalgamId,AmalgramLevel,DisciplineLevel,RouseCost,AdditionalCost,DisciplinePowerName,DisciplinePowerDescription,Duration,System,RollDescription,CounterRollDescription,BookId")] DisciplinePower disciplinePower)
         {
             if (ModelState.IsValid)
@@ -70,29 +81,35 @@ namespace VtM.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AmalgamId"] = new SelectList(_context.Disciplines, "Id", "Id", disciplinePower.AmalgamId);
-            ViewData["BookId"] = new SelectList(_context.Books, "Id", "Id", disciplinePower.BookId);
-            ViewData["DisciplineId"] = new SelectList(_context.Disciplines, "Id", "Id", disciplinePower.DisciplineId);
+            ViewData["AmalgamId"] = new SelectList(_context.Disciplines, "Id", "Name", disciplinePower.AmalgamId);
+            ViewData["BookId"] = new SelectList(_context.Books, "Id", "Title", disciplinePower.BookId);
+            ViewData["DisciplineId"] = new SelectList(_context.Disciplines, "Id", "Name", disciplinePower.DisciplineId);
             return View(disciplinePower);
         }
 
         // GET: DisciplinePowers/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (User.IsInRole(Roles.Admin.ToString())
+                || User.IsInRole(Roles.StoryTeller.ToString()))
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var disciplinePower = await _context.DisciplinePowers.FindAsync(id);
-            if (disciplinePower == null)
-            {
-                return NotFound();
+                var disciplinePower = await _context.DisciplinePowers.FindAsync(id);
+                if (disciplinePower == null)
+                {
+                    return NotFound();
+                }
+                ViewData["AmalgamId"] = new SelectList(_context.Disciplines, "Id", "Name", disciplinePower.AmalgamId);
+                ViewData["BookId"] = new SelectList(_context.Books, "Id", "Title", disciplinePower.BookId);
+                ViewData["DisciplineId"] = new SelectList(_context.Disciplines, "Id", "Name", disciplinePower.DisciplineId);
+                return View(disciplinePower);
             }
-            ViewData["AmalgamId"] = new SelectList(_context.Disciplines, "Id", "Id", disciplinePower.AmalgamId);
-            ViewData["BookId"] = new SelectList(_context.Books, "Id", "Id", disciplinePower.BookId);
-            ViewData["DisciplineId"] = new SelectList(_context.Disciplines, "Id", "Id", disciplinePower.DisciplineId);
-            return View(disciplinePower);
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: DisciplinePowers/Edit/5
@@ -100,6 +117,7 @@ namespace VtM.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("Id,DisciplineId,AmalgamId,AmalgramLevel,DisciplineLevel,RouseCost,AdditionalCost,DisciplinePowerName,DisciplinePowerDescription,Duration,System,RollDescription,CounterRollDescription,BookId")] DisciplinePower disciplinePower)
         {
             if (id != disciplinePower.Id)
@@ -127,13 +145,14 @@ namespace VtM.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AmalgamId"] = new SelectList(_context.Disciplines, "Id", "Id", disciplinePower.AmalgamId);
-            ViewData["BookId"] = new SelectList(_context.Books, "Id", "Id", disciplinePower.BookId);
-            ViewData["DisciplineId"] = new SelectList(_context.Disciplines, "Id", "Id", disciplinePower.DisciplineId);
+            ViewData["AmalgamId"] = new SelectList(_context.Disciplines, "Id", "Name", disciplinePower.AmalgamId);
+            ViewData["BookId"] = new SelectList(_context.Books, "Id", "Title", disciplinePower.BookId);
+            ViewData["DisciplineId"] = new SelectList(_context.Disciplines, "Id", "Name", disciplinePower.DisciplineId);
             return View(disciplinePower);
         }
 
         // GET: DisciplinePowers/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -142,7 +161,7 @@ namespace VtM.Controllers
             }
 
             var disciplinePower = await _context.DisciplinePowers
-                .Include(d => d.Amalgram)
+                .Include(d => d.Amalgam)
                 .Include(d => d.Book)
                 .Include(d => d.Discipline)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -157,6 +176,7 @@ namespace VtM.Controllers
         // POST: DisciplinePowers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var disciplinePower = await _context.DisciplinePowers.FindAsync(id);

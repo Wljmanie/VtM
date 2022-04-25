@@ -7,7 +7,7 @@ namespace VtM.Models
     {
         public int Id { get; set; }
         public int? DisciplineId { get; set; }
-        [ForeignKey("Amalgram")]
+        [ForeignKey("Amalgam")]
         public int? AmalgamId { get; set; }
         [Range(0, 5)]
         public int? AmalgramLevel { get; set; }
@@ -26,7 +26,7 @@ namespace VtM.Models
         public string? CounterRollDescription { get; set; }
 
         public virtual Discipline? Discipline { get; set; }
-        public virtual Discipline? Amalgram { get; set; }
+        public virtual Discipline? Amalgam { get; set; }
 
         public int? BookId { get; set; }
         public virtual Book? Book { get; set; }
