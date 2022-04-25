@@ -2,10 +2,10 @@
 @model IEnumerable<VtM.Models.DisciplinePower>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Discipline Powers";
 }
 
-<h1>Index</h1>
+<h1>Discipline Powers</h1>
 
 <p>
     @if (User.IsInRole(Roles.Admin.ToString()) || User.IsInRole(Roles.StoryTeller.ToString()))

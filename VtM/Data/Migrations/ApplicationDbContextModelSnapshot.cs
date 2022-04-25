@@ -187,7 +187,7 @@ namespace VtM.Data.Migrations
 
                     b.HasIndex("CharacterId");
 
-                    b.ToTable("Backgrounds");
+                    b.ToTable("Backgrounds", (string)null);
                 });
 
             modelBuilder.Entity("VtM.Models.BloodPotency", b =>
@@ -223,7 +223,7 @@ namespace VtM.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BloodPotencies");
+                    b.ToTable("BloodPotencies", (string)null);
                 });
 
             modelBuilder.Entity("VtM.Models.Book", b =>
@@ -240,7 +240,7 @@ namespace VtM.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Books");
+                    b.ToTable("Books", (string)null);
                 });
 
             modelBuilder.Entity("VtM.Models.Character", b =>
@@ -400,7 +400,7 @@ namespace VtM.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Characters");
+                    b.ToTable("Characters", (string)null);
                 });
 
             modelBuilder.Entity("VtM.Models.CharacterSkill", b =>
@@ -426,7 +426,7 @@ namespace VtM.Data.Migrations
 
                     b.HasIndex("SkillId");
 
-                    b.ToTable("CharactersSkills");
+                    b.ToTable("CharactersSkills", (string)null);
                 });
 
             modelBuilder.Entity("VtM.Models.Chronicle", b =>
@@ -449,7 +449,7 @@ namespace VtM.Data.Migrations
 
                     b.HasIndex("StoryTellerId");
 
-                    b.ToTable("Chronicles");
+                    b.ToTable("Chronicles", (string)null);
                 });
 
             modelBuilder.Entity("VtM.Models.Clan", b =>
@@ -488,7 +488,7 @@ namespace VtM.Data.Migrations
 
                     b.HasIndex("BookId");
 
-                    b.ToTable("Clans");
+                    b.ToTable("Clans", (string)null);
                 });
 
             modelBuilder.Entity("VtM.Models.Coterie", b =>
@@ -529,7 +529,7 @@ namespace VtM.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Coteries");
+                    b.ToTable("Coteries", (string)null);
                 });
 
             modelBuilder.Entity("VtM.Models.CoterieTenet", b =>
@@ -560,7 +560,7 @@ namespace VtM.Data.Migrations
 
                     b.HasIndex("CoterieId");
 
-                    b.ToTable("coterieTenets");
+                    b.ToTable("coterieTenets", (string)null);
                 });
 
             modelBuilder.Entity("VtM.Models.Discipline", b =>
@@ -586,7 +586,7 @@ namespace VtM.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Disciplines");
+                    b.ToTable("Disciplines", (string)null);
                 });
 
             modelBuilder.Entity("VtM.Models.DisciplineLevel", b =>
@@ -612,7 +612,7 @@ namespace VtM.Data.Migrations
 
                     b.HasIndex("DisciplineId");
 
-                    b.ToTable("DisciplineLevels");
+                    b.ToTable("DisciplineLevels", (string)null);
                 });
 
             modelBuilder.Entity("VtM.Models.DisciplinePower", b =>
@@ -676,7 +676,7 @@ namespace VtM.Data.Migrations
 
                     b.HasIndex("DisciplineId");
 
-                    b.ToTable("DisciplinePowers");
+                    b.ToTable("DisciplinePowers", (string)null);
                 });
 
             modelBuilder.Entity("VtM.Models.Flaw", b =>
@@ -710,7 +710,7 @@ namespace VtM.Data.Migrations
 
                     b.HasIndex("CharacterId");
 
-                    b.ToTable("Flaws");
+                    b.ToTable("Flaws", (string)null);
                 });
 
             modelBuilder.Entity("VtM.Models.Haven", b =>
@@ -736,7 +736,7 @@ namespace VtM.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Havens");
+                    b.ToTable("Havens", (string)null);
                 });
 
             modelBuilder.Entity("VtM.Models.HavenFlaw", b =>
@@ -770,7 +770,7 @@ namespace VtM.Data.Migrations
 
                     b.HasIndex("HavenId");
 
-                    b.ToTable("HavenFlaws");
+                    b.ToTable("HavenFlaws", (string)null);
                 });
 
             modelBuilder.Entity("VtM.Models.HavenImage", b =>
@@ -801,7 +801,7 @@ namespace VtM.Data.Migrations
 
                     b.HasIndex("HavenId");
 
-                    b.ToTable("HavenImages");
+                    b.ToTable("HavenImages", (string)null);
                 });
 
             modelBuilder.Entity("VtM.Models.HavenMerit", b =>
@@ -835,7 +835,7 @@ namespace VtM.Data.Migrations
 
                     b.HasIndex("HavenId");
 
-                    b.ToTable("HavenMerits");
+                    b.ToTable("HavenMerits", (string)null);
                 });
 
             modelBuilder.Entity("VtM.Models.LoreSheet", b =>
@@ -860,7 +860,7 @@ namespace VtM.Data.Migrations
 
                     b.HasIndex("BookId");
 
-                    b.ToTable("LoreSheets");
+                    b.ToTable("LoreSheets", (string)null);
                 });
 
             modelBuilder.Entity("VtM.Models.LoreSheetPart", b =>
@@ -893,7 +893,7 @@ namespace VtM.Data.Migrations
 
                     b.HasIndex("LoreSheetId");
 
-                    b.ToTable("LoreSheetParts");
+                    b.ToTable("LoreSheetParts", (string)null);
                 });
 
             modelBuilder.Entity("VtM.Models.Merit", b =>
@@ -927,7 +927,7 @@ namespace VtM.Data.Migrations
 
                     b.HasIndex("CharacterId");
 
-                    b.ToTable("Merits");
+                    b.ToTable("Merits", (string)null);
                 });
 
             modelBuilder.Entity("VtM.Models.Note", b =>
@@ -956,7 +956,7 @@ namespace VtM.Data.Migrations
 
                     b.HasIndex("CharacterId");
 
-                    b.ToTable("Notes");
+                    b.ToTable("Notes", (string)null);
                 });
 
             modelBuilder.Entity("VtM.Models.Possession", b =>
@@ -1008,7 +1008,7 @@ namespace VtM.Data.Migrations
 
                     b.HasIndex("CharacterId");
 
-                    b.ToTable("Possessions");
+                    b.ToTable("Possessions", (string)null);
                 });
 
             modelBuilder.Entity("VtM.Models.PredatorType", b =>
@@ -1038,7 +1038,7 @@ namespace VtM.Data.Migrations
 
                     b.HasIndex("BookId");
 
-                    b.ToTable("PredatorTypes");
+                    b.ToTable("PredatorTypes", (string)null);
                 });
 
             modelBuilder.Entity("VtM.Models.Ritual", b =>
@@ -1080,7 +1080,7 @@ namespace VtM.Data.Migrations
 
                     b.HasIndex("CharacterId");
 
-                    b.ToTable("Rituals");
+                    b.ToTable("Rituals", (string)null);
                 });
 
             modelBuilder.Entity("VtM.Models.Skill", b =>
@@ -1120,7 +1120,7 @@ namespace VtM.Data.Migrations
 
                     b.HasIndex("BookId");
 
-                    b.ToTable("Skills");
+                    b.ToTable("Skills", (string)null);
                 });
 
             modelBuilder.Entity("VtM.Models.SkillSpecialization", b =>
@@ -1142,7 +1142,7 @@ namespace VtM.Data.Migrations
 
                     b.HasIndex("CharacterSkillId");
 
-                    b.ToTable("SkillSpecializations");
+                    b.ToTable("SkillSpecializations", (string)null);
                 });
 
             modelBuilder.Entity("VtM.Models.ThinBloodAlchemy", b =>
@@ -1192,7 +1192,7 @@ namespace VtM.Data.Migrations
 
                     b.HasIndex("CharacterId");
 
-                    b.ToTable("ThinBloodAlchemies");
+                    b.ToTable("ThinBloodAlchemies", (string)null);
                 });
 
             modelBuilder.Entity("VtM.Models.TouchstoneConviction", b =>
@@ -1218,7 +1218,7 @@ namespace VtM.Data.Migrations
 
                     b.HasIndex("CharacterId");
 
-                    b.ToTable("TouchstoneConvictions");
+                    b.ToTable("TouchstoneConvictions", (string)null);
                 });
 
             modelBuilder.Entity("VtM.Models.VtMUser", b =>
@@ -1345,7 +1345,7 @@ namespace VtM.Data.Migrations
 
                     b.HasIndex("CharacterId");
 
-                    b.ToTable("Weapons");
+                    b.ToTable("Weapons", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

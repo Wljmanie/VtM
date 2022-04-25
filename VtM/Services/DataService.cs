@@ -34,6 +34,7 @@ namespace VtM.Services
             await SeedPredatorTypes();
             await SeedLoreSheets();
             await SeedLoreSheetParts();
+            await SeedRituals();
         }
 
         private async Task SeedRolesAsync()
@@ -865,6 +866,58 @@ namespace VtM.Services
             {
                 Console.WriteLine("*************  ERROR  *************");
                 Console.WriteLine("Error Seeding LoreSheetParts.");
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("***********************************");
+                throw;
+            }
+        }
+
+        private async Task SeedRituals()
+        {
+            if (_context.Rituals.Any()) return;
+            try
+            {
+                IList<Ritual> rituals = new List<Ritual>() {
+                    new Ritual()
+                    {
+                        Name = "Wake with evening's freshness",
+                        Description = "Performed before dawn, this ritual allows the caster to awake at any sign of danger, fully alert as if awake during the night.",
+                        RitualLevel = 1,
+                        Ingredients = "The burnt bones and feathers of a rooster.",
+                        Process = "The caster mixes the ashes with their own Blood, drawing a circle with the mixture around their place of sleep.",
+                        System = "Do not make a Ritual roll unless true danger appears. If the caster is threatened during the day, make the Ritual roll then, with the caster rousing on a win. For the duration of the scene the vampire ignores the daytime penalties for staying awake. On a critical win, the effects last until the following dawn.",
+                        BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id
+                    },
+                    new Ritual()
+                    {
+                        Name = "Communicate with kindred Sire",
+                        Description = "The caster uses the bond between sire and childe to open a bridge between minds, allowing the childe to create a telepathic link for the purpose of long-distance communication. As with some other Rituals, this one sees a resurgence in these nights of wiretaps and electronic surveillance.",
+                        RitualLevel = 2,
+                        Ingredients = "An object previously possessed by the sire and a silver bowl filled with clear water.",
+                        Process = "The caster submerges the object in water and lets their Blood drip into the bowl, concentrating upon the last memory of their sire for up to 30 minutes.",
+                        System = "Make the ritual roll after 15 minutes have passed. A win allows for ten minutes of two-way silent mental communication once 15 more minutes have passed. A critical win allows immediate communication.Any major disturbance on either end breaks the connection.",
+                        BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id
+                    },
+                    new Ritual()
+                    {
+                        Name = "Deflection of wooden doom",
+                        Description = "By performing this ritual the vampire protects themselves from being staked. The first stake that would pierce their heart shatters before penetrating the skin.",
+                        RitualLevel = 3,
+                        Ingredients = "Wood splinters or shavings.",
+                        Process = "Wood splinters or shavings.",
+                        System = "Make no Ritual roll until the vampire is staked. If the Ritual roll is a win, the stake shatters as it touches the skin of the vampire. (A critical win blinds the attacker for two turns, showering their face with splinters.) This only works on genuine attempts at staking - merely holding the stake against the vampire does not trigger the effect.The protection lasts until the end of the night or until the splinter is removed from under the tongue of the vampire, whichever comes first.",
+                        BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id
+                    }
+
+                };
+
+                await _context.AddRangeAsync(rituals);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("*************  ERROR  *************");
+                Console.WriteLine("Error Seeding Rituals.");
                 Console.WriteLine(ex.Message);
                 Console.WriteLine("***********************************");
                 throw;
