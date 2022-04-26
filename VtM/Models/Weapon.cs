@@ -29,7 +29,7 @@ namespace VtM.Models
 
         public virtual Character? Character { get; set; }
         public int BookId { get; set; }
-        public virtual Book Book { get; set; } = null!;
+        public virtual Book? Book { get; set; }
 
     }
 }

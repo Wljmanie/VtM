@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using VtM.Enums;
 
 namespace VtM.Models
 {
@@ -12,6 +13,8 @@ namespace VtM.Models
         public string? Description { get; set; }
         [Range(0,3)]
         public int? HavenRating { get; set; }
+
+        public CharacterPublicity Publicity { get; set; }
 
         public virtual ICollection<HavenMerit>? HavenMerits { get; set; } = new HashSet<HavenMerit>();
         public virtual ICollection<HavenFlaw>? HavenFlaw { get; set; } = new HashSet<HavenFlaw>();

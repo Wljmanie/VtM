@@ -13,6 +13,6 @@ namespace VtM.Models
         public int? CharacterId { get; set; }
 
         public virtual Character? Character { get; set; }
-        public virtual Coterie Coterie { get; set; } = null!;
+        public virtual Coterie? Coterie { get; set; }
     }
 }

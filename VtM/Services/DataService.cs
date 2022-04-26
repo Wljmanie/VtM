@@ -35,6 +35,7 @@ namespace VtM.Services
             await SeedLoreSheets();
             await SeedLoreSheetParts();
             await SeedRituals();
+            await SeedThinBloodAlchemy();
         }
 
         private async Task SeedRolesAsync()
@@ -918,6 +919,63 @@ namespace VtM.Services
             {
                 Console.WriteLine("*************  ERROR  *************");
                 Console.WriteLine("Error Seeding Rituals.");
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("***********************************");
+                throw;
+            }
+        }
+
+        private async Task SeedThinBloodAlchemy()
+        {
+            if (_context.ThinBloodAlchemies.Any()) return;
+
+            try
+            {
+                IList<ThinBloodAlchemy> thinBloodAlachemies = new List<ThinBloodAlchemy>()
+                {
+                    new ThinBloodAlchemy(){
+                        Name = "Far Reach",
+                        Description = "This formula allows the alchemist to use their mind to grab, hold, and push objects or people without touching them. While few can employ enough mental force to actually cause direct harm, a clever applicant can find many ways to get an opponent into, or themselves out of, harm’s way.",
+                        Ingredients = "The alchemist’s Blood, choleric human blood,melted nylon fibers or a grated refrigerator magnet or weird nootropics ordered off the internet.",
+                        ActivationCost = "One Rouse Check.",
+                        DicePools = "Resolve + Alchemy vs Strength + Athletics.",
+                        System = " The alchemist can lift, push, or pull a physical object or person under 100 kg, within their sight and closer than 10 meters. The object moves swiftly, but not rapidly enough to injure a person with the blow; the object may break if it is fragile.The exception: knives or other small metal tools, which the alchemist can wield with a Resolve + Alchemy test, at a two - dice penalty because of the need for precision.A knife used this way does only one point of extra damage. Trying to move someone actively resisting requires a contest of Resolve + Alchemy vs Strength + Athletics.On a win, the alchemist can pull the victim within grabbing or clawing range, or throw them one meter for each point of margin on the contest, doing an equal amount of Superficial damage.They land prone.Keeping someone or something floating in mid - air requires a Resolve + Thin-Blood Alchemy(Difficulty 3) roll every turn.Fine manipulation(such as pulling the pin of a grenade) requires a Wits + Alchemy roll at a suitable Difficulty, as determined by the Storyteller.",
+                        AlchemyLevel = 1,
+                        Duration = "One turn unless held (see system).",
+                        BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id
+                    },
+                    new ThinBloodAlchemy(){
+                        Name = "Haze",
+                        Description = "This formula creates a field of mist that follows the user, rendering them more difficult to target with ranged weapons and concealing their identity.",
+                        Ingredients = "In addition to the alchemist’s Blood and phlegmatic human blood, dry ice or cigar smoke or auto exhaust.",
+                        ActivationCost = "One Rouse Check.",
+                        Duration = "One scene or until voluntarily ended.",
+                        System = "Upon activation a cloud of mist-like vapor surrounds the alchemist, masking their features and obscuring their silhouette. Anyone attempting to identify the user or hit them with ranged weapons suffers a two-dice penalty to their pool. The user can extend the cloud to encompass a group of up to five people by making another Rouse check",
+                        AlchemyLevel = 1,
+                        BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id
+                    },
+                    new ThinBloodAlchemy(){
+                        Name = "Envelop",
+                        Description = "This formula creates a mist that clings to a victim, blinding it and (in the case of mortals) causing suffocation. ",
+                        Ingredients = "The alchemist’s Blood, melancholic and phlegmatic human blood, potassium chlorate, smog or halon gas.",
+                        ActivationCost = "One Rouse Check.",
+                        DicePools = "Wits + Alchemy vs Stamina + Survival.",
+                        System = "The alchemist activates the power and chooses a target within sight. A swirling mist envelops the target, obscuring their sight and penalizing them three dice from all sight-based detection and ranged attack dice pools. In addition, the alchemist can make the mist suffocate a mortal with a contest of Wits + Alchemy vs. Stamina + Survival. On a win, the target can take no action except coughing and choking; on a critical win, the target loses consciousness. The alchemist can only employ Envelop on single targets, and only on one at a time.",
+                        Duration = " Until scene ends or the alchemist ends the effect voluntarily.",
+                        AlchemyLevel = 0,
+                        BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id
+                    },
+
+
+                };
+
+                await _context.AddRangeAsync(thinBloodAlachemies);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("*************  ERROR  *************");
+                Console.WriteLine("Error Seeding Thin Blood Alchemies.");
                 Console.WriteLine(ex.Message);
                 Console.WriteLine("***********************************");
                 throw;

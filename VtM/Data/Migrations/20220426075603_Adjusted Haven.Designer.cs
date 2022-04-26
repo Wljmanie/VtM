@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VtM.Data;
 
@@ -11,9 +12,10 @@ using VtM.Data;
 namespace VtM.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220426075603_Adjusted Haven")]
+    partial class AdjustedHaven
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1163,14 +1165,8 @@ namespace VtM.Data.Migrations
                     b.Property<int>("AlchemyLevel")
                         .HasColumnType("int");
 
-                    b.Property<string>("AthanorCorporis")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("BookId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Calcinatio")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("CharacterId")
                         .HasColumnType("int");
@@ -1180,9 +1176,7 @@ namespace VtM.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DicePools")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Duration")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Ingredients")
