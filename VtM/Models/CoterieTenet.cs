@@ -7,7 +7,7 @@ namespace VtM.Models
         public int Id { get; set; }
         public int CoterieId { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; } = null!;
+        public string Description { get; set; }
         //-- The Character that brought the Tenet in. --//
         [Display(Name = "Character that brought the Tenet in.")]
         public int? CharacterId { get; set; }

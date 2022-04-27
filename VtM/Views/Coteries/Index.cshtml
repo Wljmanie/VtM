@@ -1,0 +1,92 @@
+﻿@using VtM.Enums
+@using VtM.Services.Interfaces
+@model IEnumerable<VtM.Models.Coterie>
+@inject IImageService imageService
+
+@{
+    ViewData["Title"] = "Coteries";
+}
+
+<h1>Coteries</h1>
+
+<p>
+    @if (User.IsInRole(Roles.Admin.ToString()) || User.IsInRole(Roles.StoryTeller.ToString()))
+    {
+        <a asp-action="Create">Create New</a>
+    }
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.Chasse)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lien)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Portillon)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CoterieType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Publicity)
+            </th>
+            
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                    @if(item.FileData != null && item.FileContentType != null)
+                    {
+                        <img class="img-fluid" width="200" src="@imageService.DecodeImage(item.FileData, item.FileContentType)" />
+                    }
+                    <!--TODO: Otherwise default image?-->
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.Chasse)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lien)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Portillon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CoterieType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Publicity)
+            </td>
+            
+            <td>
+                @if (User.IsInRole(Roles.Admin.ToString()) || User.IsInRole(Roles.StoryTeller.ToString()))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a><text> | </text>
+                    }
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    @if (User.IsInRole(Roles.Admin.ToString()) || User.IsInRole(Roles.StoryTeller.ToString()))
+                    {
+                        <text> | </text><a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    }
+                </td>
+        </tr>
+}
+    </tbody>
+</table>

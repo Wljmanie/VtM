@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using VtM.Enums;
 
 namespace VtM.Models
 {
@@ -13,6 +14,8 @@ namespace VtM.Models
         public int? Lien { get; set; }
         public int? Portillon { get; set; }
         public string? CoterieType { get; set; }
+
+        public Publicity Publicity { get; set; }
 
         //-- Image --//
         [NotMapped]

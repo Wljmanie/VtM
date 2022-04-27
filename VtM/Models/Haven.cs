@@ -14,7 +14,7 @@ namespace VtM.Models
         [Range(0,3)]
         public int? HavenRating { get; set; }
 
-        public CharacterPublicity Publicity { get; set; }
+        public Publicity Publicity { get; set; }
 
         public virtual ICollection<HavenMerit>? HavenMerits { get; set; } = new HashSet<HavenMerit>();
         public virtual ICollection<HavenFlaw>? HavenFlaw { get; set; } = new HashSet<HavenFlaw>();

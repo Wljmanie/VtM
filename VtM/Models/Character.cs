@@ -116,7 +116,7 @@ namespace VtM.Models
 
 
 
-        public CharacterPublicity CharacterPublicity { get; set; }
+        public Publicity CharacterPublicity { get; set; }
         public int? CoterieId { get; set; }
 
         public virtual ICollection<Weapon>? Weapons { get; set; } = new HashSet<Weapon>();

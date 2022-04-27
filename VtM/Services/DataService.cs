@@ -36,6 +36,7 @@ namespace VtM.Services
             await SeedLoreSheetParts();
             await SeedRituals();
             await SeedThinBloodAlchemy();
+            await SeedCoterie();
         }
 
         private async Task SeedRolesAsync()
@@ -976,6 +977,37 @@ namespace VtM.Services
             {
                 Console.WriteLine("*************  ERROR  *************");
                 Console.WriteLine("Error Seeding Thin Blood Alchemies.");
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("***********************************");
+                throw;
+            }
+        }
+
+        private async Task SeedCoterie()
+        {
+            if (_context.Coteries.Any()) return;
+            try
+            {
+                IList<Coterie> coteries = new List<Coterie>() {
+                     new Coterie()
+                     {
+                         Name = "Test Coterie",
+                         Description = "A test coterie with a silly description.",
+                         Chasse = 1,
+                         Lien = 2,
+                         Portillon = 0,
+                         CoterieType = "Crime makers.",
+                         Publicity = Publicity.Self
+                     }
+                };
+
+                await _context.AddRangeAsync(coteries);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("*************  ERROR  *************");
+                Console.WriteLine("Error Seeding Coteries.");
                 Console.WriteLine(ex.Message);
                 Console.WriteLine("***********************************");
                 throw;

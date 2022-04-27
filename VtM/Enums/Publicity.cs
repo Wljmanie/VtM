@@ -1,6 +1,6 @@
 ﻿namespace VtM.Enums
 {
-    public enum CharacterPublicity
+    public enum Publicity
     {
         Self,
         StoryTeller,
