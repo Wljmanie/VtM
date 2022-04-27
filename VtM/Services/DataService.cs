@@ -962,7 +962,7 @@ namespace VtM.Services
                         DicePools = "Wits + Alchemy vs Stamina + Survival.",
                         System = "The alchemist activates the power and chooses a target within sight. A swirling mist envelops the target, obscuring their sight and penalizing them three dice from all sight-based detection and ranged attack dice pools. In addition, the alchemist can make the mist suffocate a mortal with a contest of Wits + Alchemy vs. Stamina + Survival. On a win, the target can take no action except coughing and choking; on a critical win, the target loses consciousness. The alchemist can only employ Envelop on single targets, and only on one at a time.",
                         Duration = " Until scene ends or the alchemist ends the effect voluntarily.",
-                        AlchemyLevel = 0,
+                        AlchemyLevel = 2,
                         BookId = _context.Books.FirstOrDefault(b => b.Title.Equals("Core Rulebook")).Id
                     },
 

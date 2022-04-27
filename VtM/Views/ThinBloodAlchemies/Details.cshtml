@@ -1,0 +1,88 @@
+﻿@using VtM.Enums
+@model VtM.Models.ThinBloodAlchemy
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>ThinBloodAlchemy</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Ingredients)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Ingredients)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ActivationCost)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ActivationCost)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DicePools)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DicePools)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.System)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.System)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Duration)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Duration)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AthanorCorporis)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AthanorCorporis)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Calcinatio)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Calcinatio)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AlchemyLevel)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AlchemyLevel)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Book)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Book.Id)
+        </dd>
+    </dl>
+</div>
+<div>
+    @if (User.IsInRole(Roles.Admin.ToString()) || User.IsInRole(Roles.StoryTeller.ToString()))
+    {
+        <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a><text> | </text>
+    }
+    <a asp-action="Index">Back to List</a>
+</div>
