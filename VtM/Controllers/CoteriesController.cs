@@ -56,7 +56,7 @@ namespace VtM.Controllers
             if (User.IsInRole(Roles.Admin.ToString())
                 || User.IsInRole(Roles.StoryTeller.ToString()))
             {
-                ViewData["Characters"] = new SelectList(_context.VtMUsers, "Id", "UserName");
+                ViewData["Chronicles"] = new SelectList(_context.Chronicles, "Id", "Name");
                 return View();
             }
             return RedirectToAction(nameof(Index));
@@ -67,7 +67,8 @@ namespace VtM.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,Chasse,Lien,Portillon,CoterieType,Publicity,FormFile")] Coterie coterie)
+        [Authorize]
+        public async Task<IActionResult> Create([Bind("Id,ChronicleId,Name,Description,Chasse,Lien,Portillon,CoterieType,Publicity,FormFile,")] Coterie coterie)
         {
             if (ModelState.IsValid)
             {
@@ -77,6 +78,9 @@ namespace VtM.Controllers
                     coterie.FileContentType = _imageService.ContentType(coterie.FormFile);
                     coterie.FileName = coterie.FormFile.FileName;
                 }
+
+
+
                 _context.Add(coterie);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -101,6 +105,8 @@ namespace VtM.Controllers
                 {
                     return NotFound();
                 }
+
+                ViewData["Chronicles"] = new SelectList(_context.Chronicles, "Id", "Name");
                 return View(coterie);
             }
             return RedirectToAction(nameof(Index));
@@ -112,60 +118,63 @@ namespace VtM.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Chasse,Lien,Portillon,CoterieType,Publicity")] Coterie coterie, IFormFile formFile)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ChronicleId,Name,Description,Chasse,Lien,Portillon,CoterieType,Publicity")] Coterie coterie, IFormFile formFile)
         {
-            
-                if (id != coterie.Id)
+            if (id != coterie.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
                 {
-                    return NotFound();
-                }
 
-                if (ModelState.IsValid)
+                    Coterie newCoterie = await _context.Coteries.FirstOrDefaultAsync(c => c.Id == coterie.Id);
+
+                    if (newCoterie.Name != coterie.Name) newCoterie.Name = coterie.Name;
+                    if (newCoterie.ChronicleId != coterie.ChronicleId) newCoterie.ChronicleId = coterie.ChronicleId;
+                    if (newCoterie.Description != coterie.Description) newCoterie.Description = coterie.Description;
+                    if (newCoterie.Chasse != coterie.Chasse) newCoterie.Chasse = coterie.Chasse;
+                    if (newCoterie.Lien != coterie.Lien) newCoterie.Lien = coterie.Lien;
+                    if (newCoterie.Portillon != coterie.Portillon) newCoterie.Portillon = coterie.Portillon;
+                    if (newCoterie.CoterieType != coterie.CoterieType) newCoterie.CoterieType = coterie.CoterieType;
+                    if (newCoterie.Publicity != coterie.Publicity) newCoterie.Publicity = coterie.Publicity;
+
+
+                    if (formFile != null)
+                    {
+                        //replace the formfile
+                        newCoterie.FileData = await _imageService.EncodeImageAsync(formFile);
+                        newCoterie.FileContentType = _imageService.ContentType(formFile);
+                        newCoterie.FileName = formFile.FileName;
+
+
+                    }
+
+
+
+
+
+
+
+                    _context.Update(newCoterie);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
                 {
-                    try
+                    if (!CoterieExists(coterie.Id))
                     {
-
-                        Coterie newCoterie = await _context.Coteries.FirstOrDefaultAsync(c => c.Id == coterie.Id);
-
-                        if (newCoterie.Name != coterie.Name) newCoterie.Name = coterie.Name;
-                        if (newCoterie.Chasse != coterie.Chasse) newCoterie.Chasse = coterie.Chasse;
-                        if (newCoterie.Portillon != coterie.Portillon) newCoterie.Portillon = coterie.Portillon;
-                        if (newCoterie.Lien != coterie.Lien) newCoterie.Lien = coterie.Lien;
-                        if (newCoterie.CoterieType != coterie.CoterieType) newCoterie.CoterieType = coterie.CoterieType;
-                        if (newCoterie.CoterieTenets != coterie.CoterieTenets) newCoterie.CoterieTenets = coterie.CoterieTenets;
-                        if (newCoterie.Characters != coterie.Characters) newCoterie.Characters = coterie.Characters;
-                        if (newCoterie.Publicity != coterie.Publicity) newCoterie.Publicity = coterie.Publicity;
-                        if (newCoterie.Description != coterie.Description) newCoterie.Description = coterie.Description;
-
-                        if (formFile != null)
-                        {
-                            newCoterie.FileData = await _imageService.EncodeImageAsync(formFile);
-                            newCoterie.FileContentType = _imageService.ContentType(formFile);
-                            newCoterie.FileName = formFile.FileName;
-                        }
-
-
-
-
-
-                        _context.Update(newCoterie);
-                        await _context.SaveChangesAsync();
+                        return NotFound();
                     }
-                    catch (DbUpdateConcurrencyException)
+                    else
                     {
-                        if (!CoterieExists(coterie.Id))
-                        {
-                            return NotFound();
-                        }
-                        else
-                        {
-                            throw;
-                        }
+                        throw;
                     }
-                    return RedirectToAction(nameof(Index));
                 }
-                return View(coterie);
-            
+                return RedirectToAction(nameof(Index));
+            }
+            return View(coterie);
         }
 
         // GET: Coteries/Delete/5

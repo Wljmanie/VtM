@@ -8,6 +8,7 @@ namespace VtM.Models
     public class Coterie
     {
         public int Id { get; set; }
+        public int ChronicleId { get; set; }
         public string Name { get; set; } = null!;
         public string? Description { get; set; }
         public int? Chasse { get; set; }

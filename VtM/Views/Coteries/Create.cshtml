@@ -14,6 +14,11 @@
         <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <label asp-for="ChronicleId" class="control-label"></label>
+                <select id="characterId" class ="form-control" asp-items="ViewBag.Chronicles"></select>
+                <span asp-validation-for="ChronicleId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
@@ -48,51 +53,12 @@
                 <select asp-for="Publicity" asp-items="Html.GetEnumSelectList<Publicity>()" class="form-control"></select>
                 <span asp-validation-for="Publicity" class="text-danger"></span>
             </div>
+            
             <div class="form-group">
                 <label asp-for="FormFile" class="control-label"></label>
                 <input type="file" asp-for="FormFile" class="form-control" />
                 <span asp-validation-for="FormFile" class="text-danger"></span>
             </div>
-            
-            <div class"form-group">
-                <div class="row">
-                    <div class="col">
-                        <label class="control-label">Character</label>
-                    </div>
-                    <div class="col">
-                        <label class="control-label">Tenet</label>
-                    </div>
-
-                </div>
-
-                <div class="row">
-                    <div class="col">
-                         <select id="characterId" class ="form-control" asp-items="ViewBag.Characters"></select>
-                    </div>
-                    <div class="col">
-                        <input type="text" class="form-control" id="tenetId" />
-                    </div>
-
-                </div>
-
-                <div class="row">
-                    <div class="col">
-                        <button id="AddId" name="Add" type="button" class"btn btn-dark btn-sm">Add</button>
-                    </div>
-                    <div class="col">
-                        <button id="DeleteId" name="Delete" type="button" class"btn btn-dark btn-sm">Delete</button>
-                    </div>
-
-                </div>
-
-                <div class="row">
-                    <select class="btn-block" name="tenetValues" id="TenetList" multiple></select>
-                </div>
-
-            </div>
-
-
-
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -104,18 +70,6 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
-
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src=~/js/CoterieTenet.js> </script>
-<script>
-    let tenetValues = '@ViewData["TenetValues"]';
-
-    document.getElementById("AddId").addEventListener("click", AddChronicleTenet );
-    document.getElementById("DeleteId").addEventListener("click", DeleteChronicleTenet );
-
-</script>
-

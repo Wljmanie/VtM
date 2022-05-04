@@ -2,7 +2,6 @@
 @using VtM.Services.Interfaces
 @model IEnumerable<VtM.Models.Coterie>
 @inject IImageService imageService
-
 @{
     ViewData["Title"] = "Coteries";
 }
@@ -19,7 +18,7 @@
     <thead>
         <tr>
             <th>
-                
+                @Html.DisplayNameFor(model => model.ChronicleId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
@@ -40,7 +39,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Publicity)
             </th>
-            
+            <th>
+                @Html.DisplayNameFor(model => model.FormFile)
+            </th>
             
             <th></th>
         </tr>
@@ -49,11 +50,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                    @if(item.FileData != null && item.FileContentType != null)
-                    {
-                        <img class="img-fluid" width="200" src="@imageService.DecodeImage(item.FileData, item.FileContentType)" />
-                    }
-                    <!--TODO: Otherwise default image?-->
+                @Html.DisplayFor(modelItem => item.ChronicleId)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -74,6 +71,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Publicity)
             </td>
+            <td>
+                @if(item.FileData != null && item.FileContentType != null)
+            {
+                <img class="img-fluid" width="200" src="@imageService.DecodeImage(item.FileData, item.FileContentType)" />  
+            }
+            </td>
+            
             
             <td>
                 @if (User.IsInRole(Roles.Admin.ToString()) || User.IsInRole(Roles.StoryTeller.ToString()))

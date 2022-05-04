@@ -3,24 +3,31 @@
 function AddChronicleTenet() {
     //var chronicleTenetEntry = 
     //console.log("Jaa AddChronicleClicks");
-    var tenetEntry = document.getElementById("tenetId");
-    var characterEntry = document.getElementById("characterId");
+    //var tenetEntry = document.getElementById("tenetNameId");
+    //var characterEntry = document.getElementById("characterId");
+    //
+    //let searchResult = Search(tenetEntry.value);
+    //
+    //if (searchResult != null) {
+    //    swalWithDarkButton.fire({
+    //        html: `<span class="font-weight-bolder">${searchResult}</span>`
+    //    });
+    //}
+    //else {
+    //
+    //
+    //
+    //    let newOption = new Option(tenetEntry.value, tenetEntry.value);
+    //    document.getElementById("TenetList").options[index++] = newOption;
+    //}
+    //
+    //tenetEntry.value = "";
+    //return true;
+    //
 
-    let searchResult = Search(tenetEntry.value);
-
-    if (searchResult != null) {
-        swalWithDarkButton.fire({
-            html: `<span class="font-weight-bolder">${searchResult}</span>`
-        });
-    }
-    else {
-        let newOption = new Option(tenetEntry.value, tenetEntry.value);
-        document.getElementById("TenetList").options[index++] = newOption;
-    }
-
-    tenetEntry.value = "";
-    return true;
-
+    console.log("Add Button Clicked.");
+    var characterId = document.getElementById("")
+    var tenetName = document.getElementById("tenetNameId");
 }
 
 function DeleteChronicleTenet() {
