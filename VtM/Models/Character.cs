@@ -19,7 +19,7 @@ namespace VtM.Models
         public string? Desire { get; set; }
         public int? PredatorTypeId { get; set; }
 
-        public int ClanId { get; set; }
+        public int? ClanId { get; set; }
         public int? Generation { get; set; }
         public string? Sire { get; set; }
 
@@ -121,7 +121,7 @@ namespace VtM.Models
 
         public virtual ICollection<Weapon>? Weapons { get; set; } = new HashSet<Weapon>();
 
-        public int HavenId { get; set; }
+        public int? HavenId { get; set; }
         public virtual Haven? Haven { get; set; }
 
         public virtual ICollection<Ritual>? Rituals { get; set; } = new HashSet<Ritual>();

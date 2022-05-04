@@ -10,8 +10,8 @@ namespace VtM.Models
         [Range(1, 5)]
         public int Value { get; set; }
         public int HavenId { get; set; }
-        public virtual Haven Haven { get; set; } = null!;
+        public virtual Haven? Haven { get; set; }
         public int BookId { get; set; }
-        public virtual Book Book { get; set; } = null!;
+        public virtual Book? Book { get; set; }
     }
 }
